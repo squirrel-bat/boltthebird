@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Should You Bolt the Bird?</title>
+    <link rel="stylesheet" href="main.css" />
+  </head>
+  <body>
+    <nav class="row">
+      <button
+        id="back-button"
+        onclick="window.location.assign('')"
+        class="menu-btn hidden"
+      >
+        < Take me back
+      </button>
+      <button onclick="replayIntro()" class="menu-btn">
+        <span class="icon">↺</span>&nbsp;&nbsp;Splash again!
+      </button>
+    </nav>
+    <h1 class="site-title">
+      Should You
+      <span class="word-bolt"><span>Bol</span><span>t</span></span>
+      the
+      <span class="word-bird"
+        ><span>B</span><span>i</span><span>r</span><span>d</span></span
+      >?
+    </h1>
+
+    <div data-route="start" class="fade-in display-none row">
+      <button onclick="callRoute('info')">Let's find out!</button> OR
+      <button onclick="callRoute('bolt')" disabled>Just here to bolt!</button>
+    </div>
+
+    <main data-route="info" class="fade-in display-none">
+      <div class="step" data-id="1">
+        <header class="row">
+          <div class="question active">
+            <div class="question-content">
+              Is there a...
+              <figure class="fZoil">
+                <img
+                  src="https://cards.scryfall.io/large/front/8/2/82ef6d6c-db50-4d24-8ebd-311613ddef06.jpg"
+                  alt="Birds of Paradise - ☘ "
+                />
+              </figure>
+              ...on the Battlefield?
+            </div>
+          </div>
+        </header>
+        <div class="row">
+          <button onclick="answer(this)" data-next="2" class="answer bg-green">
+            Yes
+          </button>
+          <button onclick="answer(this)" data-next="3" class="answer bg-red">
+            No
+          </button>
+        </div>
+      </div>
+
+      <div class="step display-none" data-id="2">
+        <header class="row">
+          <div class="question">
+            <div class="question-content">Who controls it?</div>
+          </div>
+        </header>
+        <div class="row">
+          <button
+            onclick="answer(this)"
+            data-next="wait"
+            class="answer bg-green"
+          >
+            Me
+          </button>
+          <button onclick="answer(this)" data-next="bolt" class="answer bg-red">
+            An Opponent
+          </button>
+        </div>
+      </div>
+
+      <div class="step display-none" data-id="3">
+        <header class="row">
+          <div class="question">
+            <div class="question-content">
+              Is there at least one other mana dork on the Battlefield?
+            </div>
+          </div>
+        </header>
+        <div class="row">
+          <button onclick="answer(this)" data-next="2" class="answer bg-green">
+            Llanowar Elves
+          </button>
+          <button onclick="answer(this)" data-next="2" class="answer bg-green">
+            Fyndhorn Elves
+          </button>
+          <button onclick="answer(this)" data-next="2" class="answer bg-green">
+            Elvish Mystic
+          </button>
+          <button onclick="answer(this)" data-next="2" class="answer bg-green">
+            Elves of Deep Shadow
+          </button>
+          <button onclick="answer(this)" data-next="2" class="answer bg-green">
+            Arbor Elf
+          </button>
+          <button onclick="answer(this)" data-next="2" class="answer bg-green">
+            Avacyn's Pilgrim
+          </button>
+          <button onclick="answer(this)" data-next="2" class="answer bg-green">
+            Noble Hierarch
+          </button>
+          <button onclick="answer(this)" data-next="2" class="answer bg-green">
+            Ignoble Hierarch
+          </button>
+          <button onclick="answer(this)" data-next="wait" class="answer bg-red">
+            No
+          </button>
+        </div>
+      </div>
+
+      <div class="step display-none" data-id="bolt">
+        <header class="row">
+          <div class="question">
+            <div class="question-content">Bolt it!</div>
+          </div>
+        </header>
+
+        <button onclick="window.location.assign('')">
+          <span class="icon">↺</span>&nbsp;&nbsp;Restart
+        </button>
+      </div>
+
+      <div class="step display-none" data-id="wait">
+        <header class="row">
+          <div class="question">
+            <div class="question-content">Stay vigilant!</div>
+          </div>
+        </header>
+
+        <button onclick="window.location.assign('')">
+          <span class="icon">↺</span>&nbsp;&nbsp;Restart
+        </button>
+      </div>
+    </main>
+
+    <div class="island">
+      <div class="smoke-and-lava"></div>
+      <div class="volcano"></div>
+    </div>
+    <div class="water-splash"></div>
+    <script src="bolt.js"></script>
+  </body>
+</html>
