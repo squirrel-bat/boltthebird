@@ -1,0 +1,65 @@
+@import 'shared.css';
+
+body,
+main {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+
+  --card-aspect: calc(88.9 / 63.5);
+  --bullet-size: 1.5rem;
+  --mountain-height: 8rem;
+  --mountain-width: calc(var(--mountain-height) / var(--card-aspect));
+}
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+}
+#magazine {
+  display: flex;
+  flex-direction: row;
+  padding: var(--bullet-size);
+  gap: calc(var(--bullet-size) / 4);
+}
+.bullet {
+  display: inline-block;
+  height: var(--bullet-size);
+  width: var(--bullet-size);
+  background-image: url('mana-red.svg');
+  background-size: var(--bullet-size);
+  filter: drop-shadow(-0.025rem 0.1rem 0 var(--black));
+  opacity: 1;
+  animation: fade-in 0.3s ease-in-out, bird-letter 1s ease-out forwards;
+}
+
+#reload {
+  position: absolute;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  transform: translateY(-50%);
+}
+.mountain {
+  display: inline-block;
+  content: url('ody-344-mountain.jpg');
+  height: var(--mountain-height);
+  border-radius: 0.25rem;
+  transform-origin: 50% 75%;
+  margin-left: calc((var(--mountain-width) / 1.5) * -1);
+  --mountain-delay: 0ms;
+  --mountain-duration: 500ms;
+  animation: title 500ms ease-out forwards,
+    tap var(--mountain-duration) ease var(--mountain-delay) forwards;
+}
+.mountain:last-of-type {
+  margin-right: 0;
+}
+.fade-out {
+  --fade-duration: 500ms;
+  --fade-delay: 0ms;
+  animation: fade-out var(--fade-duration) ease var(--fade-delay) forwards;
+}

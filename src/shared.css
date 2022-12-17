@@ -127,6 +127,14 @@
     opacity: 1;
   }
 }
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
 @keyframes island {
   0% {
     transform: translate(-50%, var(--start-pos)) skewX(-20deg);
@@ -176,6 +184,11 @@
   }
   100% {
     transform: translate(0, 0);
+  }
+}
+@keyframes tap {
+  100% {
+    transform: rotateZ(90deg);
   }
 }
 :root {
