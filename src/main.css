@@ -1,28 +1,5 @@
 @import 'shared.css';
-html {
-  font-family: AmaticSC, sans-serif;
-  color: var(--black);
-  font-size: 2rem;
-  font-weight: bold;
-  text-align: center;
-  background: linear-gradient(
-      to bottom,
-      blue -7rem,
-      var(--blue) 1.5rem,
-      transparent 6.5rem,
-      var(--white) 8.25rem,
-      transparent 8.25rem,
-      var(--blue) 25rem
-    ),
-    var(--blue-light);
-  background-size: 100% 100%;
-  background-attachment: var(--main-bg-attachment);
-}
-@media screen and (max-device-width: 480px) {
-  html {
-    font-size: 1rem;
-  }
-}
+
 body {
   position: relative;
   min-height: 100vh;
