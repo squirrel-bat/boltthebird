@@ -6,6 +6,8 @@ main {
   min-height: 100vh;
   overflow: hidden;
 
+  cursor: crosshair;
+
   --card-aspect: calc(88.9 / 63.5);
   --bullet-size: 1.5rem;
   --mountain-height: 8rem;
@@ -62,4 +64,33 @@ footer {
   --fade-duration: 500ms;
   --fade-delay: 0ms;
   animation: fade-out var(--fade-duration) ease var(--fade-delay) forwards;
+}
+
+.bird {
+  --bird-x: 50;
+  --bird-y: 50;
+  cursor: cell;
+  user-select: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform-origin: center;
+  transform: translate(calc(var(--bird-x) * 1vw), calc(var(--bird-y) * 1vh));
+}
+.bird.hit > div {
+  animation: shaking 0.05s linear 10;
+}
+.damage {
+  --cursor-x: 0;
+  --cursor-y: 0;
+  pointer-events: none !important;
+  position: absolute;
+  left: calc(var(--cursor-x) * 1px);
+  top: calc(var(--cursor-y) * 1px);
+  animation: damage 500ms ease-out forwards;
+}
+.damage > div {
+  transform: translate(-50%, -100%);
+  font-size: 2rem;
+  color: var(--red-alert);
 }

@@ -191,6 +191,12 @@
     transform: rotateZ(90deg);
   }
 }
+@keyframes damage {
+  100% {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+}
 :root {
   --green-light: rgb(196, 211, 202);
   --green: rgb(14, 138, 55);
