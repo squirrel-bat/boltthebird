@@ -1,161 +1,87 @@
-const MAG_STATUS = {
-  IDLE: 'IDLE',
-  RELOADING: 'RELOADING',
+import { Hand } from './hand.js'
+import { AnimationPlayer } from './animationPlayer.js'
+import { Bird } from './bird.js'
+import { countdownSecondsFrom, sleep } from './shared.js'
+import { Score } from './score.js'
+
+window.settings = {
+  MAX_BIRDS_ON_SCREEN: 3,
+  BIRD_TRAVEL_DURATION: 5000,
+  MAGAZINE_SIZE: 7,
+  DAMAGE_TEXT: '-3',
+  AUDIO_MUTED: true,
 }
-
-class Hand {
-  SIZE = 7
-  #rounds = 0
-  STATUS
-
-  constructor(animPlayer, magStatus) {
-    this.animPLayer = animPlayer
-    this.STATUS = magStatus.IDLE
-  }
-  get rounds() {
-    return this.#rounds
-  }
-  async shoot() {
-    if (this.STATUS !== MAG_STATUS.IDLE) return false
-    // play shoot anim
-    --this.#rounds
-    if (this.rounds <= 0) return this.reload()
-    return ANIMATIONPLAYER.updateMagazineHUD(HAND.rounds)
-  }
-  async reload() {
-    if (this.STATUS !== MAG_STATUS.IDLE) return false
-    this.STATUS = MAG_STATUS.RELOADING
-    this.#rounds = this.SIZE
-    await this.animPLayer.reloadMagazine(this.#rounds)
-    this.STATUS = MAG_STATUS.IDLE
-  }
-}
-
-class AnimationPlayer {
-  #magazine
-  RELOAD_BULLET_DELAY = 100
-  BULLET = document.createElement('i')
-
-  constructor() {
-    this.#magazine = document.getElementById('magazine')
-    this.BULLET.classList.add('bullet')
-  }
-
-  async #playReloadAnim(count) {
-    const reload = document.getElementById('reload')
-    const DELAY = 100
-    const DURATION = 300
-    for (let i = 0; i < count; i++) {
-      const delay = i * DELAY
-      const mountain = document.createElement('i')
-      mountain.classList.add('mountain')
-      mountain.setAttribute('style', '--mountain-delay: ' + delay + 'ms')
-      reload.prepend(mountain)
-    }
-    //TODO: refactor to .style.setProperty()
-    reload.setAttribute(
-      'style',
-      '--fade-duration: ' +
-        DURATION +
-        'ms; --fade-delay: ' +
-        ((count - 1) * DELAY + DURATION) +
-        'ms'
-    )
-    reload.classList.add('fade-out')
-    return new Promise((resolve) => {
-      reload.addEventListener('animationend', (e) => {
-        if (e.target === reload) {
-          e.currentTarget.classList.remove('fade-out')
-          e.currentTarget.innerHTML = ''
-          resolve()
-        }
-      })
-    })
-  }
-  async reloadMagazine(amount) {
-    await Promise.all([
-      this.#playReloadAnim(amount),
-      this.updateMagazineHUD(amount, true),
-    ])
-  }
-  async updateMagazineHUD(amount, reloading = false) {
-    const bullets = this.#magazine.querySelectorAll('.bullet')
-    if (reloading === true) {
-      this.#magazine.innerHTML = ''
-      for (let i = 0; i < amount; i++) {
-        const bullet = this.BULLET.cloneNode()
-        await sleep(this.RELOAD_BULLET_DELAY)
-        this.#magazine.appendChild(bullet)
-      }
-    } else {
-      const diff = bullets.length - amount
-      for (let i = 0; i < diff; i++) {
-        this.#magazine.querySelector('.bullet:last-of-type').remove()
-      }
-    }
-  }
-}
-
-class Bird {
-  DMG_TEXT = '-3'
-  element = document.createElement('div')
-
-  constructor(position) {
-    const innerElement = document.createElement('div')
-    innerElement.innerText = 'Bird'
-    this.element.appendChild(innerElement)
-    this.element.classList.add('bird')
-    this.element.style.setProperty('--bird-x', position.x)
-    this.element.style.setProperty('--bird-y', position.y)
-    this.element.addEventListener(
-      'pointerdown',
-      (e) => {
-        this.element.classList.add('hit')
-        this.spawnDmgText(e)
-        this.element.addEventListener('animationend', () => {
-          document.body.removeChild(this.element)
-        })
-      },
-      { once: true }
-    )
-  }
-
-  spawnDmgText(pointerEvent) {
-    const dmgText = document.createElement('div')
-    dmgText.innerText = this.DMG_TEXT
-    const dmg = document.createElement('div')
-    dmg.classList.add('damage')
-    dmg.style.setProperty('--cursor-x', pointerEvent.clientX.toString())
-    dmg.style.setProperty('--cursor-y', pointerEvent.clientY.toString())
-    dmg.appendChild(dmgText)
-    dmg.addEventListener('animationend', (e) => e.currentTarget.remove())
-    document.body.appendChild(dmg)
-  }
-}
-
-function sleep(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms))
-}
-
-let ANIMATIONPLAYER
-let HAND
 
 window.addEventListener(
   'load',
   async () => {
-    ANIMATIONPLAYER = new AnimationPlayer()
-    HAND = new Hand(ANIMATIONPLAYER, MAG_STATUS)
-    await HAND.reload()
+    const hand = new Hand(new AnimationPlayer(), new Score(0))
+    const ambientSound = new Audio('./ambient_sea.mp3')
+    ambientSound.volume = 0.8
+    ambientSound.loop = true
+    ambientSound.muted = window.settings.AUDIO_MUTED
+    window.ambientSound = ambientSound
 
-    //TODO: Flying across the screen from random angle
-    const firstBird = new Bird({ x: 50, y: 40 })
-    document.body.appendChild(firstBird.element)
+    document.getElementById('start-game').addEventListener(
+      'click',
+      async () => {
+        document.getElementById('start-screen').classList.toggle('display-none')
+        document.getElementById('game').classList.toggle('display-none')
+        await startGame()
+      },
+      { once: true }
+    )
 
-    window.addEventListener('keyup', async (e) => {
-      if (e.key === 'r') {
-        await HAND.reload()
+    document
+      .getElementById('toggle-audio')
+      .addEventListener('click', toggleMuted)
+
+    async function toggleMuted() {
+      document.getElementById('toggle-audio').classList.toggle('sound-off')
+      window.settings.AUDIO_MUTED = !window.settings.AUDIO_MUTED
+      ambientSound.muted = window.settings.AUDIO_MUTED
+      await ambientSound.play()
+    }
+
+    async function startGame() {
+      // register some hotkeys
+      window.addEventListener('keyup', async (e) => {
+        switch (e.key) {
+          case 'r':
+            hand.reload()
+            break
+          case 'm':
+            await toggleMuted()
+            break
+        }
+      })
+
+      // handle shots that miss
+      document
+        .getElementById('game')
+        .addEventListener('pointerdown', async (event) => {
+          await hand.shoot(event)
+        })
+
+      // start ambient sounds
+      window.ambientSound.play().catch((_) => _)
+      // initial magazine reload
+      hand.reload()
+
+      // set and start the timer
+      countdownSecondsFrom(60, document.getElementById('timer-val')).then(
+        () => {
+          // TODO: End game, Ending Screen
+          console.warn('GAME ENDED')
+        }
+      )
+
+      // kick off the first wave of birds
+      for (let i = 0; i < window.settings.MAX_BIRDS_ON_SCREEN; i++) {
+        new Bird(hand).spawn(5000)
+        await sleep(300)
       }
-    })
+    }
   },
   { once: true }
 )

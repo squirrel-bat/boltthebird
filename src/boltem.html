@@ -7,18 +7,34 @@
     <link rel="stylesheet" href="boltem.css" />
   </head>
   <body>
-    <aside>
-      <div class="game-start display-none">Starting screen</div>
+    <aside id="start-screen">
+      <h1 id="game-title">Bolt 'em!</h1>
+      <div id="game-menu">
+        <button id="start-game">Start the game!</button>
+        <button id="toggle-audio" class="sound-off bg-blue">
+          Sound:&nbsp;
+        </button>
+        <button class="menu-btn" onclick="window.location.assign('index.html')">
+          < Take me back
+        </button>
+      </div>
     </aside>
 
-    <main class="game">
+    <main id="game" class="display-none">
+      <header>
+        <div id="score"><span>🐦</span><span id="score-val">0</span></div>
+        <div id="timer"><span id="timer-val">0:00</span><span>⏱</span></div>
+      </header>
       <footer>
         <div id="magazine"></div>
       </footer>
     </main>
 
-    <aside id="reload"></aside>
+    <aside id="reload">
+      <div id="mountains"></div>
+      <div id="reload-text" class="display-none">Tapping for mana...</div>
+    </aside>
 
-    <script src="boltem.js"></script>
+    <script src="boltem.js" type="module"></script>
   </body>
 </html>

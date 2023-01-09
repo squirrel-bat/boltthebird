@@ -186,15 +186,45 @@
     transform: translate(0, 0);
   }
 }
+@keyframes spin-right {
+  0% {
+    transform: rotateZ(0);
+  }
+  100% {
+    transform: rotateZ(1turn);
+  }
+}
 @keyframes tap {
   100% {
     transform: rotateZ(90deg);
   }
 }
 @keyframes damage {
+  50% {
+    opacity: 1;
+  }
   100% {
     opacity: 0;
     transform: translateY(-100%);
+  }
+}
+@keyframes tremble {
+  50% {
+    transform: translateY(0.5%);
+  }
+}
+@keyframes cursor-splash {
+  0% {
+    transform-origin: center;
+    transform: scale(0, 0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1, 1);
+    opacity: 0;
   }
 }
 :root {
@@ -202,12 +232,14 @@
   --green: rgb(14, 138, 55);
   --green-dark: rgb(0, 115, 62);
   --red-light: rgb(241, 201, 182);
-  --red: rgb(185, 0, 0);
+  --red: rgb(228, 153, 119);
+  --red-dark: rgb(185, 0, 0);
   --purple-light: rgb(212, 201, 227);
   --purple: rgb(99, 68, 150);
   --purple-dark: rgb(75, 72, 95);
   --blue-light: rgb(179, 219, 230);
   --blue: rgb(4, 172, 192);
+  --blue-50: rgb(4, 172, 192, 0.5);
   --orange: rgb(239, 106, 24);
   --yellow: rgb(239, 196, 24);
   --sand: rgb(230, 228, 184);
@@ -232,6 +264,12 @@
 }
 .bg-green {
   background-color: var(--green);
+}
+.text-red-dark {
+  color: var(--red-dark);
+}
+.bg-red-dark {
+  background-color: var(--red-dark);
 }
 .text-red {
   color: var(--red);
@@ -284,4 +322,45 @@ html {
   html {
     font-size: 1rem;
   }
+}
+button {
+  user-select: none !important;
+  cursor: pointer;
+  font: inherit;
+  font-size: 1.5rem;
+  color: var(--white);
+  text-shadow: 0.05rem 0.05rem 0 var(--black);
+  padding: 0.12rem 0.6rem;
+  min-width: 4rem;
+  border-radius: 0.25rem;
+  border: 0.075rem solid var(--black-50);
+  background: var(--orange);
+  box-shadow: 0 0.2rem 0 var(--grey-dark);
+  transform-origin: bottom center;
+  transition: all 0.15s ease-out;
+}
+button[disabled] {
+  cursor: not-allowed;
+}
+button:hover {
+  transform: translateY(0.1rem);
+  box-shadow: 0 0.1rem 0 var(--grey-dark);
+}
+button:active {
+  transform: translateY(0.2rem);
+  opacity: 0.8;
+  box-shadow: none;
+  filter: none;
+}
+.menu-btn {
+  font-size: 1rem;
+  color: var(--black-50);
+  text-shadow: none;
+  background: none;
+  border: none;
+  box-shadow: none !important;
+}
+.menu-btn:hover {
+  color: var(--black);
+  background: var(--white-50);
 }
