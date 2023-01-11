@@ -12,7 +12,7 @@ export class AnimationPlayer {
 
   async #playReloadAnim(count) {
     const DELAY = 100
-    const DURATION = 200
+    const DURATION = 150
     const reload = document.getElementById('reload')
     const reloadText = document.getElementById('reload-text')
     const mountains = document.getElementById('mountains')
@@ -27,6 +27,7 @@ export class AnimationPlayer {
       const mountain = document.createElement('div')
       mountain.classList.add('mountain')
       mountain.style.setProperty('--mountain-delay', delay + 'ms')
+      mountain.style.setProperty('--mountain-duration', '300ms')
       mountains.prepend(mountain)
 
       const soundCard = new Audio('./slash.mp3')
@@ -70,12 +71,21 @@ export class AnimationPlayer {
   }
 
   spawnSplash(at) {
-    // TODO: Fix air splashing
     const splashInner = document.createElement('div')
     const splash = document.createElement('div')
     splash.classList.add('splash', 'at-cursor')
     splash.appendChild(splashInner)
     this.spawnElementAt(splash, at)
+    return true
+  }
+
+  spawnPuff(at) {
+    const puffInner = document.createElement('div')
+    const puff = document.createElement('div')
+    puff.classList.add('puff', 'at-cursor')
+    puff.appendChild(puffInner)
+    this.spawnElementAt(puff, at)
+    return true
   }
 
   async reloadMagazine(amount) {

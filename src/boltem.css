@@ -28,31 +28,34 @@ main {
   position: relative;
   z-index: 9001;
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 2rem;
 
   cursor: default;
 }
+#top-menu {
+  text-align: left;
+  padding: 0.5rem;
+}
 #game-title {
-  font-size: 3rem;
+  font-size: 4rem;
+  color: var(--black);
+  text-shadow: none;
+  margin: 0 -4rem 2rem;
 }
 #game-menu {
-  min-width: 10rem;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 12rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   gap: 0.5rem;
 }
-#game-menu > *:last-child {
-  margin-top: 1rem;
-  align-self: center;
-}
 
 #toggle-audio:after {
   content: '🔊';
+  margin-left: 0.5rem;
 }
 #toggle-audio.sound-off:after {
   content: '🔇' !important;
@@ -123,7 +126,6 @@ footer {
 }
 #reload-text {
   font-size: 2rem;
-  padding-top: 1rem;
 }
 #mountains {
   display: flex;
@@ -151,18 +153,23 @@ footer {
   --fade-duration: 500ms;
   --fade-delay: 0ms;
 
+  background: var(--black-50);
+
   animation: fade-out var(--fade-duration) ease var(--fade-delay) forwards;
 }
 
 .bird {
   position: absolute;
+  pointer-events: none;
   top: 0;
   left: 0;
   filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.16))
     drop-shadow(0 4px 3px rgba(0, 0, 0, 0.23));
+
+  translate: -50% -50%;
 }
 .bird-inner {
-  transform: translate(-50%, -50%);
+  pointer-events: auto !important;
 }
 .bird-inner > img {
   max-width: 6rem;
@@ -171,8 +178,8 @@ footer {
 .bird.hit > .bird-inner > img {
   animation: shaking 50ms linear 10, fade-out 100ms linear forwards 200ms;
 }
-.flip-y {
-  transform: translate(-50%, -50%) scaleX(-1);
+.bird-flip-y {
+  scale: -1 1;
 }
 .spinning {
   animation: spin-right 1s linear infinite;
@@ -186,13 +193,14 @@ footer {
   top: calc(var(--cursor-y) * 1px);
 }
 .damage {
+  z-index: 1337;
   animation: damage 800ms ease-out forwards;
-  text-shadow: 0.05rem 0.05rem 0 var(--orange),
-    0.05rem 0.05rem 0.05rem var(--red-dark);
+  color: var(--red-alert);
+  text-shadow: 0.05rem 0.05rem 0.05rem var(--red-dark);
 }
 .damage > div {
   transform: translate(-50%, -100%);
-  font-size: 1.5rem;
+  font-size: 2rem;
 }
 .shake {
   animation: tremble 100ms ease-out;
@@ -218,4 +226,26 @@ footer {
   animation: cursor-splash 1s ease-out 50ms;
   border-radius: 99rem;
   outline: 0.3rem solid var(--white);
+}
+
+.puff {
+  height: 3rem;
+  width: 3rem;
+  transform: translate(-50%, -50%);
+}
+.puff > div {
+  height: inherit;
+  width: inherit;
+  animation: cursor-splash 500ms ease-out;
+  border-radius: 99rem;
+  outline: 0.5rem dotted var(--white-50);
+}
+.puff > div:after {
+  content: '';
+  display: block;
+  height: inherit;
+  width: inherit;
+  animation: cursor-splash 470ms ease-out 30ms;
+  border-radius: 99rem;
+  outline: 0.5rem dotted var(--white);
 }

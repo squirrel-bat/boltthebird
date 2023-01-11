@@ -2,14 +2,14 @@ import {
   createOppositeSidePositionOffscreen,
   createRandomPositionOffscreen,
   movesToLeft,
-  randomBool,
-  randomIntBetween0and,
+  randomBoolFromManyRandomBools,
+  randomIntBetweenZeroAnd,
 } from './shared.js'
 
 export class Bird {
   #element = document.createElement('div')
   #sound
-  SPAWN_OFFSET = 5
+  SPAWN_OFFSET = 10
   TYPES = [
     {
       src: './bird_a.png',
@@ -19,7 +19,7 @@ export class Bird {
     {
       src: './bird_b.png',
       sound: './bruh.mp3',
-      volume: 0.5,
+      volume: 0.4,
     },
     {
       src: './bird_c.png',
@@ -34,21 +34,21 @@ export class Bird {
   ]
 
   constructor(hand) {
-    const birdType = this.TYPES.at(randomIntBetween0and(this.TYPES.length))
-    const birdSound = new Audio(birdType.sound)
-    birdSound.volume = birdType.volume
+    this.birdType = this.TYPES.at(randomIntBetweenZeroAnd(this.TYPES.length))
+    const birdSound = new Audio(this.birdType.sound)
+    birdSound.volume = this.birdType.volume
     this.#sound = birdSound
     this.hand = hand
 
     const img = document.createElement('img')
     img.setAttribute('draggable', 'false')
-    img.src = birdType.src
-    img.addEventListener('pointerdown', async (event) => {
-      await hand.shoot(event, this)
-    })
+    img.src = this.birdType.src
 
     const inner = document.createElement('div')
     inner.classList.add('bird-inner')
+    inner.addEventListener('pointerdown', async (event) => {
+      await hand.shoot(event, this)
+    })
     inner.appendChild(img)
 
     this.#element.classList.add('bird')
@@ -82,9 +82,9 @@ export class Bird {
     this.element.animation = animation
     const birdInner = this.#element.querySelector('.bird-inner')
     if (movesToLeft(from, to)) {
-      birdInner.classList.add('flip-y')
-    } else if (randomBool() && randomBool()) {
-      // we want this to be rare, hence multiple coin flips
+      birdInner.classList.add('bird-flip-y')
+    }
+    if (randomBoolFromManyRandomBools(3, true)) {
       birdInner.classList.add('spinning')
     }
 

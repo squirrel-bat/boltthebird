@@ -19,12 +19,12 @@ const ROUTES = [
     },
   },
   {
-    route: 'info',
+    route: 'always',
     navigate: () => {
       hideAllPages()
       document.getElementById('back-button').classList.add('hidden')
-      window.location.hash = 'info'
-      showPage('info')
+      window.location.hash = 'always'
+      showPage('always')
       drawLines()
       document.querySelectorAll('.question').forEach((q) => {
         q.addEventListener('click', (e) =>
@@ -38,23 +38,15 @@ const ROUTES = [
       scrollToBottom()
     },
   },
-  {
-    route: 'boltit',
-    navigate: () => {
-      hideAllPages()
-      document.getElementById('back-button').classList.add('hidden')
-      window.location.hash = 'bolt'
-      showPage('bolt')
-      document.getElementById('back-button').classList.remove('hidden')
-    },
-  },
 ]
 
 function callRoute(route) {
   try {
     ROUTES.find((e) => e.route === route).navigate()
+    return Promise.resolve()
   } catch (e) {
     ROUTES.find((e) => e.route === '/').navigate()
+    return Promise.reject()
   }
 }
 function hideAllPages() {
@@ -217,8 +209,13 @@ function answer(el) {
 window.addEventListener(
   'load',
   () => {
-    const route = window.location.hash.slice(1)
-    callRoute(route)
+    let route = window.location.hash.slice(1)
+    callRoute(route).then(
+      (_resolve) => {
+        document.getElementById('site-title').classList.add('skip-animation')
+      },
+      (_reject) => {}
+    )
   },
   { once: true }
 )

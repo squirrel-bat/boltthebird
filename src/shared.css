@@ -240,6 +240,8 @@
   --blue-light: rgb(179, 219, 230);
   --blue: rgb(4, 172, 192);
   --blue-50: rgb(4, 172, 192, 0.5);
+  --blue-dark: rgb(4, 111, 133);
+  --blue-rgb: rgb(4, 4, 255);
   --orange: rgb(239, 106, 24);
   --yellow: rgb(239, 196, 24);
   --sand: rgb(230, 228, 184);
@@ -253,6 +255,7 @@
   --red-alert: rgb(211, 32, 42);
 
   --main-bg-attachment: scroll;
+  --bg-horizon-pos: 8.25rem;
   --island-pos: absolute;
 
   --questions-gap-x: 1rem;
@@ -283,6 +286,9 @@
 .bg-blue {
   background-color: var(--blue);
 }
+.bg-blue-dark {
+  background-color: var(--blue-dark);
+}
 .display-none {
   display: none !important;
 }
@@ -307,11 +313,11 @@ html {
   text-align: center;
   background: linear-gradient(
       to bottom,
-      blue -7rem,
+      var(--blue-rgb) -7rem,
       var(--blue) 1.5rem,
       transparent 6.5rem,
-      var(--white) 8.25rem,
-      transparent 8.25rem,
+      var(--white) var(--bg-horizon-pos),
+      transparent var(--bg-horizon-pos),
       var(--blue) 25rem
     ),
     var(--blue-light);
@@ -322,6 +328,10 @@ html {
   html {
     font-size: 1rem;
   }
+}
+img {
+  color: var(--white);
+  text-shadow: 0.05rem 0.05rem 0 var(--black);
 }
 button {
   user-select: none !important;
@@ -363,4 +373,72 @@ button:active {
 .menu-btn:hover {
   color: var(--black);
   background: var(--white-50);
+}
+.word-bolt {
+  display: inline-block;
+  white-space: nowrap;
+  color: #fff;
+  text-shadow: 0.05rem 0.05rem 0.05rem var(--red-light),
+    0.1rem 0.1rem 0 var(--red-dark);
+}
+.word-bolt span:first-child {
+  display: inline-block;
+  animation: bolt-BOL 4s ease-in-out infinite;
+  transform-origin: bottom right;
+}
+.word-bolt span:last-child {
+  display: inline-block;
+  animation: bolt-T 4s ease-in-out infinite;
+  transform-origin: bottom center;
+}
+
+.word-bird {
+  text-shadow: 0.05rem 0.05rem 0 var(--black);
+  white-space: nowrap;
+}
+.word-bird span {
+  display: inline-block;
+  transform-origin: bottom center;
+  animation: bird-letter 3s ease infinite;
+  --letter-delay: 150ms;
+}
+.word-bird span:nth-child(1) {
+  color: var(--red-dark);
+  animation-delay: calc(1 * var(--letter-delay));
+}
+.word-bird span:nth-child(2) {
+  color: var(--purple);
+  animation-delay: calc(2 * var(--letter-delay));
+}
+.word-bird span:nth-child(3) {
+  color: var(--yellow);
+  animation-delay: calc(3 * var(--letter-delay));
+}
+.word-bird span:nth-child(4) {
+  color: var(--green);
+  animation-delay: calc(4 * var(--letter-delay));
+}
+.foil {
+  filter: brightness(1.1);
+}
+.foil::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 200%;
+  width: 200%;
+  opacity: 0.33;
+  background: linear-gradient(
+    to bottom right,
+    var(--green),
+    #00f,
+    #f00,
+    var(--green),
+    #00f,
+    #f00,
+    var(--green)
+  );
+  transform: translate(-50%, -50%);
+  animation: foil 2s ease infinite;
 }

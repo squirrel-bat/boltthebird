@@ -8,15 +8,22 @@
   </head>
   <body>
     <aside id="start-screen">
-      <h1 id="game-title">Bolt 'em!</h1>
-      <div id="game-menu">
-        <button id="start-game">Start the game!</button>
-        <button id="toggle-audio" class="sound-off bg-blue">
-          Sound:&nbsp;
-        </button>
+      <nav id="top-menu">
         <button class="menu-btn" onclick="window.location.assign('index.html')">
           < Take me back
         </button>
+      </nav>
+
+      <div id="game-menu">
+        <h1 id="game-title">
+          <span class="word-bolt"><span>Bol</span><span>t</span></span>
+          the
+          <span class="word-bird"
+            ><span>B</span><span>i</span><span>r</span><span>d</span></span
+          >!
+        </h1>
+        <button id="start-game">Start Game!</button>
+        <button id="toggle-audio" class="sound-off bg-blue-dark">Sound:</button>
       </div>
     </aside>
 
@@ -31,8 +38,8 @@
     </main>
 
     <aside id="reload">
-      <div id="mountains"></div>
       <div id="reload-text" class="display-none">Tapping for mana...</div>
+      <div id="mountains"></div>
     </aside>
 
     <script src="boltem.js" type="module"></script>

@@ -1,4 +1,4 @@
-import { isNotActionShoot, MAG_STATUS } from './shared.js'
+import { convertRemToPixels, isNotActionShoot, MAG_STATUS } from './shared.js'
 import { Bird } from './bird.js'
 
 export class Hand {
@@ -51,10 +51,26 @@ export class Hand {
       )
     } else {
       // MISSED
-      const soundMissed = new Audio('./splash.mp3')
-      soundMissed.volume = 0.8
-      if (!window.settings.AUDIO_MUTED) await soundMissed.play()
-      this.AnimPlayer.spawnSplash({ x: event.clientX, y: event.clientY })
+      const soundMissedAir = new Audio('./dry_puff.mp3')
+      soundMissedAir.volume = 1.0
+      const soundMissedWater = new Audio('./splash.mp3')
+      soundMissedWater.volume = 0.8
+      const at = { x: event.clientX, y: event.clientY }
+
+      const horizon = getComputedStyle(
+        document.documentElement
+      ).getPropertyValue('--bg-horizon-pos')
+      const horizonPos = convertRemToPixels(horizon.slice(0, -3))
+      const hitWater = at.y > horizonPos
+      if (hitWater) {
+        this.AnimPlayer.spawnSplash(at)
+      } else {
+        this.AnimPlayer.spawnPuff(at)
+      }
+
+      if (!window.settings.AUDIO_MUTED) {
+        await (hitWater ? soundMissedWater.play() : soundMissedAir.play())
+      }
     }
     if (this.rounds <= 0) return this.reload()
     return this.AnimPlayer.updateMagazineHUD(this.rounds)

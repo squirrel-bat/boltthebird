@@ -16,10 +16,10 @@
         < Take me back
       </button>
       <button onclick="replayIntro()" class="menu-btn">
-        <span class="icon">↺</span>&nbsp;&nbsp;Splash again!
+        <span class="icon">↺</span>Splash again!
       </button>
     </nav>
-    <h1 class="site-title">
+    <h1 id="site-title">
       Should You
       <span class="word-bolt"><span>Bol</span><span>t</span></span>
       the
@@ -28,24 +28,26 @@
       >?
     </h1>
 
-    <div data-route="start" class="fade-in display-none row">
-      <button onclick="callRoute('info')">Let's find out!</button> OR
-      <button onclick="window.location.assign('boltem.html')">
-        Just here to bolt!
+    <div id="route-start" data-route="start" class="fade-in display-none">
+      <button class="bg-blue-dark" onclick="callRoute('always')">
+        Let's find out!
+      </button>
+      <button
+        class="menu-btn"
+        onclick="window.location.assign('https://articles.starcitygames.com/articles/this-is-precisely-why-you-still-always-bolt-the-bird/')"
+      >
+        <span class="icon">ⓘ</span>Wait, <i>what?</i>
       </button>
     </div>
 
-    <main data-route="info" class="fade-in display-none">
+    <main data-route="always" class="fade-in display-none">
       <div class="step" data-id="1">
         <header class="row">
           <div class="question active">
             <div class="question-content">
               Is there a...
-              <figure class="fZoil">
-                <img
-                  src="https://cards.scryfall.io/large/front/8/2/82ef6d6c-db50-4d24-8ebd-311613ddef06.jpg"
-                  alt="Birds of Paradise - ☘ "
-                />
+              <figure>
+                <img src="BirdsOfParadise.jpg" alt="Birds of Paradise - 🍀" />
               </figure>
               ...on the Battlefield?
             </div>
@@ -99,28 +101,7 @@
         </header>
         <div class="row">
           <button onclick="answer(this)" data-next="2" class="answer bg-green">
-            Llanowar Elves
-          </button>
-          <button onclick="answer(this)" data-next="2" class="answer bg-green">
-            Fyndhorn Elves
-          </button>
-          <button onclick="answer(this)" data-next="2" class="answer bg-green">
-            Elvish Mystic
-          </button>
-          <button onclick="answer(this)" data-next="2" class="answer bg-green">
-            Elves of Deep Shadow
-          </button>
-          <button onclick="answer(this)" data-next="2" class="answer bg-green">
-            Arbor Elf
-          </button>
-          <button onclick="answer(this)" data-next="2" class="answer bg-green">
-            Avacyn's Pilgrim
-          </button>
-          <button onclick="answer(this)" data-next="2" class="answer bg-green">
-            Noble Hierarch
-          </button>
-          <button onclick="answer(this)" data-next="2" class="answer bg-green">
-            Ignoble Hierarch
+            Yes
           </button>
           <button
             onclick="answer(this)"
@@ -135,13 +116,28 @@
       <div class="step display-none" data-id="bolt">
         <header class="row">
           <div class="question">
-            <div class="question-content">Bolt it!</div>
+            <div class="question-content">
+              Cast a...
+              <figure>
+                <img
+                  src="https://cards.scryfall.io/large/front/d/a/dabcac3f-59e9-42e0-8c29-fbfb059a506e.jpg"
+                  alt="Lightning Bolt - 🔥 "
+                />
+              </figure>
+              ...to kill it off right away!
+            </div>
           </div>
         </header>
 
-        <button onclick="window.location.assign('')">
-          <span class="icon">↺</span>&nbsp;&nbsp;Restart
-        </button>
+        <div class="row">
+          <button class="bg-blue-dark" onclick="window.location.reload()">
+            <span class="icon">↺</span>Restart
+          </button>
+
+          <button onclick="window.location.assign('boltem.html')">
+            Let's go! >
+          </button>
+        </div>
       </div>
 
       <div class="step display-none" data-id="wait">
@@ -151,9 +147,15 @@
           </div>
         </header>
 
-        <button onclick="window.location.assign('')">
-          <span class="icon">↺</span>&nbsp;&nbsp;Restart
-        </button>
+        <div class="row">
+          <button class="bg-blue-dark" onclick="window.location.reload()">
+            <span class="icon">↺</span>Restart
+          </button>
+
+          <button onclick="window.location.assign('boltem.html')">
+            Let me bolt something! >
+          </button>
+        </div>
       </div>
     </main>
 

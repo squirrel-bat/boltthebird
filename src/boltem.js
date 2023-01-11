@@ -71,7 +71,7 @@ window.addEventListener(
       // set and start the timer
       countdownSecondsFrom(60, document.getElementById('timer-val')).then(
         () => {
-          // TODO: End game, Ending Screen
+          //TODO: End game, Ending Screen
           console.warn('GAME ENDED')
         }
       )

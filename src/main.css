@@ -129,7 +129,7 @@ nav {
   box-shadow: 0 0 0.05rem 0.05rem var(--red-dark);
   transform: rotateZ(-25deg);
 }
-.site-title {
+#site-title {
   font-size: 2.5rem;
   text-transform: uppercase;
   margin: 12rem -0.5rem 2.5rem;
@@ -140,52 +140,19 @@ nav {
   transform: translateX(-101vw);
   animation: title 0.5s ease-in 1.5s forwards;
 }
+#site-title.skip-animation {
+  transform: none !important;
+  animation: none !important;
+}
 .icon {
   margin-left: -0.25rem;
+  margin-right: 0.5rem;
 }
-.word-bolt {
-  display: inline-block;
-  white-space: nowrap;
-  color: #fff;
-  text-shadow: 0.05rem 0.05rem 0.05rem var(--red-light),
-    0.1rem 0.1rem 0 var(--red-dark);
-}
-.word-bolt span:first-child {
-  display: inline-block;
-  animation: bolt-BOL 4s ease-in-out infinite;
-  transform-origin: bottom right;
-}
-.word-bolt span:last-child {
-  display: inline-block;
-  animation: bolt-T 4s ease-in-out infinite;
-  transform-origin: bottom center;
-}
-
-.word-bird {
-  text-shadow: 0.05rem 0.05rem 0 var(--black);
-  white-space: nowrap;
-}
-.word-bird span {
-  display: inline-block;
-  transform-origin: bottom center;
-  animation: bird-letter 3s ease infinite;
-  --letter-delay: 150ms;
-}
-.word-bird span:nth-child(1) {
-  color: var(--red-dark);
-  animation-delay: calc(1 * var(--letter-delay));
-}
-.word-bird span:nth-child(2) {
-  color: var(--purple);
-  animation-delay: calc(2 * var(--letter-delay));
-}
-.word-bird span:nth-child(3) {
-  color: var(--yellow);
-  animation-delay: calc(3 * var(--letter-delay));
-}
-.word-bird span:nth-child(4) {
-  color: var(--green);
-  animation-delay: calc(4 * var(--letter-delay));
+#route-start {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
 }
 main,
 .step {
@@ -194,6 +161,10 @@ main,
   justify-content: start;
   align-items: center;
   gap: var(--questions-gap);
+}
+.step[data-id='bolt'],
+.step[data-id='wait'] {
+  gap: calc(var(--questions-gap-y) / 2) var(--questions-gap-x);
 }
 .row {
   align-self: stretch;
@@ -254,27 +225,6 @@ img {
   border-radius: 0.66rem;
   overflow: hidden;
 }
-.foil::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 200%;
-  width: 200%;
-  opacity: 0.25;
-  background: linear-gradient(
-    to bottom right,
-    var(--green),
-    #00f,
-    #f00,
-    var(--green),
-    #00f,
-    #f00,
-    var(--green)
-  );
-  transform: translate(-50%, -50%);
-  animation: foil 2s ease infinite;
-}
 .question.active {
   z-index: 1;
   box-shadow: 0.1rem 0.15rem 0 var(--red-dark);
@@ -321,7 +271,7 @@ img {
 .question.active:hover .question-content::after {
   content: '⬤';
   position: absolute;
-  top: -0.5rem;
+  top: -0.75rem;
   left: 50%;
   height: 1.5rem;
   width: 1.5rem;
