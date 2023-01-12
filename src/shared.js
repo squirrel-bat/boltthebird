@@ -79,7 +79,6 @@ function createOppositeSidePositionOffscreen(startPos, offset) {
     case RECTANGLE_SIDES.TOP:
       newPos.x = randomIntBetweenZeroAnd(100)
       if (Math.abs(startPos.x - newPos.x) < offset) {
-        console.warn(startPos, newPos)
         newPos.x = pushValueFurtherSignedDirBy(newPos.x, offset)
       }
       newPos.y = 100 + offset
@@ -87,7 +86,6 @@ function createOppositeSidePositionOffscreen(startPos, offset) {
     case RECTANGLE_SIDES.BOTTOM:
       newPos.x = randomIntBetweenZeroAnd(100)
       if (Math.abs(startPos.x - newPos.x) < offset) {
-        console.warn(startPos, newPos)
         newPos.x = pushValueFurtherSignedDirBy(newPos.x, offset)
       }
       newPos.y = offset * -1
@@ -96,7 +94,6 @@ function createOppositeSidePositionOffscreen(startPos, offset) {
       newPos.x = 100 + offset
       newPos.y = randomIntBetweenZeroAnd(100)
       if (Math.abs(startPos.y - newPos.y) < offset) {
-        console.warn(startPos, newPos)
         newPos.y = pushValueFurtherSignedDirBy(newPos.y, offset)
       }
       break
@@ -104,7 +101,6 @@ function createOppositeSidePositionOffscreen(startPos, offset) {
       newPos.x = offset * -1
       newPos.y = randomIntBetweenZeroAnd(100)
       if (Math.abs(startPos.y - newPos.y) < offset) {
-        console.warn(startPos, newPos)
         newPos.y = pushValueFurtherSignedDirBy(newPos.y, offset)
       }
       break
