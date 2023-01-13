@@ -144,10 +144,6 @@ nav {
   transform: none !important;
   animation: none !important;
 }
-.icon {
-  margin-left: -0.25rem;
-  margin-right: 0.5rem;
-}
 #route-start {
   display: flex;
   flex-direction: column;
@@ -165,15 +161,6 @@ main,
 .step[data-id='bolt'],
 .step[data-id='wait'] {
   gap: calc(var(--questions-gap-y) / 2) var(--questions-gap-x);
-}
-.row {
-  align-self: stretch;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: calc(var(--questions-gap-y) / 3) var(--questions-gap-x);
 }
 .question {
   position: relative;
@@ -327,7 +314,4 @@ img {
 }
 .arrow-head {
   fill: var(--blue-light);
-}
-.fade-in {
-  animation: fade-in 1s ease forwards;
 }

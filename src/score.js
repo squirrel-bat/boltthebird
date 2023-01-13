@@ -2,7 +2,7 @@ export class Score {
   #value = 0
 
   constructor(initialValue) {
-    this.#value = initialValue
+    this.value = initialValue
   }
 
   get value() {

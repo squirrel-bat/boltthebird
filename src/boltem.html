@@ -9,22 +9,24 @@
   </head>
   <body>
     <aside id="start-screen">
-      <nav id="top-menu">
+      <nav class="top-menu">
         <button class="menu-btn" onclick="window.location.assign('index.html')">
           < Take me back
         </button>
       </nav>
 
-      <div id="game-menu">
-        <h1 id="game-title">
+      <div class="game-menu">
+        <h1 class="game-menu-title text-black text-shadow-none">
           <span class="word-bolt"><span>Bol</span><span>t</span></span>
           the
           <span class="word-bird"
             ><span>B</span><span>i</span><span>r</span><span>d</span></span
           >!
         </h1>
-        <button id="start-game">Start Game!</button>
-        <button id="toggle-audio" class="sound-off bg-blue-dark">Sound:</button>
+        <div class="container-min-width">
+          <button id="start-game">Start Game!</button>
+          <button class="toggle-audio sound-off bg-blue-dark">Sound:</button>
+        </div>
       </div>
     </aside>
 
@@ -37,10 +39,41 @@
         <div id="magazine"></div>
       </footer>
     </main>
-
-    <aside id="reload">
-      <div id="reload-text" class="display-none">Tapping for mana...</div>
+    <aside id="reload" class="display-none">
+      <div id="reload-text">Tapping for mana...</div>
       <div id="mountains"></div>
+    </aside>
+
+    <aside id="end-screen" class="display-none fade-in">
+      <nav class="top-menu">
+        <button class="menu-btn" onclick="window.location.assign('index.html')">
+          < Take me back
+        </button>
+      </nav>
+
+      <div class="game-menu">
+        <h1 class="game-menu-title">Time's Up!</h1>
+        <div class="container-min-width">
+          <div id="results">
+            <div id="bolted-score" class="row">
+              <div class="score-label">Bolted:</div>
+              <div class="score-value">0</div>
+            </div>
+            <div id="escaped-score" class="row">
+              <div class="score-label">Escaped:</div>
+              <div class="score-value">0</div>
+            </div>
+            <div id="missed-score" class="row">
+              <div class="score-label">Missed Bolts:</div>
+              <div class="score-value">0</div>
+            </div>
+          </div>
+          <button id="restart-game">
+            <span class="icon">↺</span>Play Again!
+          </button>
+          <button class="toggle-audio sound-off bg-blue-dark">Sound:</button>
+        </div>
+      </div>
     </aside>
 
     <script src="boltem.js" type="module"></script>

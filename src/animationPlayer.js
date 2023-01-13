@@ -14,14 +14,13 @@ export class AnimationPlayer {
     const DELAY = 100
     const DURATION = 150
     const reload = document.getElementById('reload')
-    const reloadText = document.getElementById('reload-text')
     const mountains = document.getElementById('mountains')
+    reload.classList.remove('display-none')
 
     const soundSlide = new Audio('./whoosh.mp3')
-    soundSlide.volume = 0.8
+    soundSlide.volume = 1.0
     if (!window.settings.AUDIO_MUTED) await soundSlide.play()
 
-    reloadText.classList.remove('display-none')
     for (let i = 0; i < count; i++) {
       const delay = i * DELAY
       const mountain = document.createElement('div')
@@ -31,7 +30,7 @@ export class AnimationPlayer {
       mountains.prepend(mountain)
 
       const soundCard = new Audio('./slash.mp3')
-      soundCard.volume = 0.6
+      soundCard.volume = 0.7
       setTimeout(async () => {
         if (!window.settings.AUDIO_MUTED) await soundCard.play()
       }, delay)
@@ -47,7 +46,7 @@ export class AnimationPlayer {
         if (e.target === reload) {
           e.currentTarget.classList.remove('fade-out')
           mountains.innerHTML = ''
-          reloadText.classList.add('display-none')
+          reload.classList.add('display-none')
           resolve()
         }
       })

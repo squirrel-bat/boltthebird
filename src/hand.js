@@ -30,6 +30,7 @@ export class Hand {
     ) {
       // HIT
       this.Score.value++
+      window.gameTracker.bolted = this.Score.value
 
       const soundHit = new Audio('./hit_slap.mp3')
       soundHit.volume = 0.6
@@ -51,10 +52,11 @@ export class Hand {
       )
     } else {
       // MISSED
+      window.gameTracker.missed++
       const soundMissedAir = new Audio('./dry_puff.mp3')
       soundMissedAir.volume = 1.0
       const soundMissedWater = new Audio('./splash.mp3')
-      soundMissedWater.volume = 0.8
+      soundMissedWater.volume = 0.9
       const at = { x: event.clientX, y: event.clientY }
 
       const horizon = getComputedStyle(

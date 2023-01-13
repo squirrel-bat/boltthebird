@@ -24,43 +24,51 @@ main {
   --mountain-width: calc(var(--mountain-height) / var(--card-aspect));
 }
 
-#start-screen {
+#start-screen,
+#end-screen {
   position: relative;
   z-index: 9001;
   min-height: 100vh;
 
   cursor: default;
 }
-#top-menu {
+.top-menu {
   text-align: left;
   padding: 0.5rem;
 }
-#game-title {
-  font-size: 4rem;
-  color: var(--black);
-  text-shadow: none;
-  margin: 0 -4rem 2rem;
-}
-#game-menu {
+.game-menu {
   position: absolute;
-  top: 40%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  min-width: 12rem;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  width: 100vw;
+  padding: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  align-items: center;
   gap: 0.5rem;
+  border-radius: 0.5rem;
 }
-
-#toggle-audio:after {
+.game-menu-title {
+  position: relative;
+  font-size: 4rem;
+  margin: 0 -4rem 1rem;
+  align-self: stretch;
+}
+.container-min-width {
+  width: 14rem;
+  display: flex;
+  flex-direction: inherit;
+  gap: inherit;
+}
+.toggle-audio:after {
   content: '🔊';
   margin-left: 0.5rem;
 }
-#toggle-audio.sound-off:after {
+.toggle-audio.sound-off:after {
   content: '🔇' !important;
 }
-
 header,
 #timer,
 #score {
@@ -172,6 +180,7 @@ footer {
   pointer-events: auto !important;
 }
 .bird-inner > img {
+  position: relative;
   max-width: 6rem;
   max-height: 5rem;
 }
@@ -179,7 +188,9 @@ footer {
   animation: shaking 50ms linear 10, fade-out 100ms linear forwards 200ms;
 }
 .bird-flip-y {
-  scale: -1 1;
+  /*BUG: Pointer events aren't registered for negative scaled elements with property "scale"*/
+  /*scale: -1 1; */
+  transform: scale(-1, 1);
 }
 .spinning {
   animation: spin-right 1s linear infinite;
@@ -248,4 +259,72 @@ footer {
   animation: cursor-splash 470ms ease-out 30ms;
   border-radius: 99rem;
   outline: 0.5rem dotted var(--white);
+}
+#end-screen .game-menu-title {
+  background: linear-gradient(to bottom, var(--orange) 10%, var(--yellow) 110%);
+  text-shadow: none;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0.05rem 0.05rem var(--black));
+  animation: bird-letter 3s ease infinite;
+}
+#results {
+  display: flex;
+  flex-direction: column;
+  font-size: 2rem;
+  text-align: left;
+  margin-bottom: 1.5rem;
+}
+#results .row {
+  justify-content: space-between;
+  border-bottom: 0.1rem dashed var(--white-50);
+}
+#results .row:last-child {
+  border-bottom: none;
+}
+.score-label {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.25rem;
+}
+.score-label:before {
+  content: '';
+  display: inline-block;
+  height: 1.8rem;
+  width: 2.4rem;
+  margin-right: 0.5rem;
+  border-radius: 0.25rem;
+  filter: drop-shadow(0.05rem 0.05rem 0 var(--black-50));
+}
+#bolted-score {
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" style="font-size: 32px; text-shadow: 0.025rem 0.025rem 0 black;" height="64" width="64"><text y="32" x="0">🐦</text></svg>')
+      16 16,
+    pointer;
+}
+#bolted-score .score-label:before {
+  background: url('bolted.gif') no-repeat 40% 0;
+  background-size: auto 1.8rem;
+}
+#escaped-score {
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" style="font-size: 32px; text-shadow: 0.025rem 0.025rem 0 black;" height="64" width="64"><text y="32" x="0">💨</text></svg>')
+      16 16,
+    pointer;
+}
+#escaped-score .score-label:before {
+  background: url('escaped.gif') no-repeat 0 20%;
+  background-size: auto 2.2rem;
+}
+#missed-score {
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" style="font-size: 32px; text-shadow: 0.025rem 0.025rem 0 black;" height="64" width="64"><text y="32" x="0">👀</text></svg>')
+      16 16,
+    pointer;
+}
+#missed-score .score-label:before {
+  background: url('missed.gif') no-repeat 75% 0;
+  background-size: auto 2.4rem;
+}
+.score-value {
+  font-size: 2.5rem;
 }

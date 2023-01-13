@@ -1,6 +1,7 @@
 import {
   createOppositeSidePositionOffscreen,
   createRandomPositionOffscreen,
+  GAME_STATUS,
   movesToLeft,
   randomBoolFromManyRandomBools,
   randomIntBetweenZeroAnd,
@@ -14,22 +15,22 @@ export class Bird {
     {
       src: './bird_a.png',
       sound: './wilhelm.mp3',
-      volume: 0.8,
+      volume: 1.0,
     },
     {
       src: './bird_b.png',
       sound: './bruh.mp3',
-      volume: 0.4,
+      volume: 0.5,
     },
     {
       src: './bird_c.png',
       sound: './oof.mp3',
-      volume: 0.8,
+      volume: 1.0,
     },
     {
       src: './bird_d.png',
       sound: './toy.mp3',
-      volume: 0.5,
+      volume: 0.6,
     },
   ]
 
@@ -66,7 +67,7 @@ export class Bird {
   spawn(duration) {
     const from = createRandomPositionOffscreen(this.SPAWN_OFFSET)
     const to = createOppositeSidePositionOffscreen(from, this.SPAWN_OFFSET)
-    const animation = this.element.animate(
+    const animation = this.#element.animate(
       [
         {
           transform:
@@ -79,7 +80,7 @@ export class Bird {
       ],
       duration
     )
-    this.element.animation = animation
+    this.#element.animation = animation
     const birdInner = this.#element.querySelector('.bird-inner')
     if (movesToLeft(from, to)) {
       birdInner.classList.add('bird-flip-y')
@@ -89,9 +90,15 @@ export class Bird {
     }
 
     animation.addEventListener('finish', () => {
-      document.body.removeChild(this.element)
-      new Bird(this.hand).spawn(duration)
+      try {
+        if (document.body.removeChild(this.#element)) {
+          window.gameTracker.escaped++
+        }
+        if (window.gameStatus === GAME_STATUS.RUNNING) {
+          new Bird(this.hand).spawn(duration)
+        }
+      } catch (_) {}
     })
-    document.body.appendChild(this.element)
+    document.body.appendChild(this.#element)
   }
 }

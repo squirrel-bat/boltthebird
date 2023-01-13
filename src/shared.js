@@ -1,3 +1,8 @@
+const GAME_STATUS = {
+  IDLE: 'IDLE',
+  RUNNING: 'RUNNING',
+  ENDED: 'ENDED',
+}
 const MAG_STATUS = {
   IDLE: 'IDLE',
   RELOADING: 'RELOADING',
@@ -173,6 +178,7 @@ function convertRemToPixels(rem) {
 }
 
 export {
+  GAME_STATUS,
   MAG_STATUS,
   RECTANGLE_SIDES,
   randomBool,

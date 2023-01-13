@@ -285,6 +285,15 @@
 .bg-blue-dark {
   background-color: var(--blue-dark);
 }
+.text-black {
+  color: var(--black);
+}
+.bg-black-50 {
+  background-color: var(--black-50);
+}
+.text-shadow-none {
+  text-shadow: none;
+}
 .display-none {
   display: none !important;
 }
@@ -329,6 +338,10 @@ img {
   color: var(--white);
   text-shadow: 0.05rem 0.05rem 0 var(--black);
 }
+.icon {
+  margin-left: -0.25rem;
+  margin-right: 0.5rem;
+}
 button {
   user-select: none !important;
   cursor: pointer;
@@ -347,6 +360,8 @@ button {
 }
 button[disabled] {
   cursor: not-allowed;
+  filter: saturate(0);
+  opacity: 0.5;
 }
 button:hover {
   transform: translateY(0.1rem);
@@ -369,6 +384,15 @@ button:active {
 .menu-btn:hover {
   color: var(--black);
   background: var(--white-50);
+}
+.row {
+  align-self: stretch;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: calc(var(--questions-gap-y) / 3) var(--questions-gap-x);
 }
 .word-bolt {
   display: inline-block;
@@ -437,4 +461,7 @@ button:active {
   );
   transform: translate(-50%, -50%);
   animation: foil 2s ease infinite;
+}
+.fade-in {
+  animation: fade-in 1s ease forwards;
 }
