@@ -3,7 +3,7 @@
 body {
   position: relative;
   min-height: 100vh;
-  padding: 0.5rem 0.5rem 2rem;
+  padding: 0.5rem 0.5rem 5rem;
 }
 nav {
   justify-content: space-between !important;
@@ -169,7 +169,7 @@ main,
 }
 .struck.active {
   color: var(--white) !important;
-  text-shadow: 0.05rem 0.05rem 0 var(--black);
+  text-shadow: var(--text-shadow-default);
   box-shadow: 0.1rem 0.15rem 0 var(--orange) !important;
 
   animation: shaking 0.05s linear 10 !important;
@@ -314,4 +314,6 @@ img {
 }
 .arrow-head {
   fill: var(--blue-light);
+}
+.copyright {
 }

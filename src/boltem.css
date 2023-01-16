@@ -15,7 +15,7 @@ main {
   cursor: crosshair;
 
   color: var(--white);
-  text-shadow: 0.05rem 0.05rem 0 var(--black);
+  text-shadow: var(--text-shadow-default);
 
   --card-aspect: calc(88.9 / 63.5);
   --bullet-size: 2rem;
@@ -89,11 +89,6 @@ header {
   font-size: 3rem;
 }
 footer {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  width: 100vw;
   padding: calc(var(--bullet-size) / 2);
 }
 #magazine {

@@ -250,6 +250,8 @@
   --black-50: rgba(20, 20, 20, 0.5);
   --red-alert: rgb(211, 32, 42);
 
+  --text-shadow-default: 0.05rem 0.05rem 0 var(--black);
+
   --main-bg-attachment: scroll;
   --bg-horizon-pos: 8.25rem;
   --island-pos: absolute;
@@ -336,7 +338,7 @@ html {
 }
 img {
   color: var(--white);
-  text-shadow: 0.05rem 0.05rem 0 var(--black);
+  text-shadow: var(--text-shadow-default);
 }
 .icon {
   margin-left: -0.25rem;
@@ -348,7 +350,7 @@ button {
   font: inherit;
   font-size: 1.5rem;
   color: var(--white);
-  text-shadow: 0.05rem 0.05rem 0 var(--black);
+  text-shadow: var(--text-shadow-default);
   padding: 0.12rem 0.6rem;
   min-width: 4rem;
   border-radius: 0.25rem;
@@ -385,6 +387,34 @@ button:active {
   color: var(--black);
   background: var(--white-50);
 }
+.copyright {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  gap: 0.4rem;
+  font-size: 1.5rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+  width: 100vw;
+  padding: 1rem;
+  color: var(--white);
+  text-shadow: var(--text-shadow-default);
+}
+.copyright a {
+  text-decoration: none;
+  color: var(--orange);
+  background: linear-gradient(to bottom, var(--orange) 10%, var(--yellow) 110%);
+  text-shadow: none;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0.05rem 0.05rem var(--black));
+}
+.copyright a:hover {
+  text-decoration: underline;
+}
 .row {
   align-self: stretch;
   display: flex;
@@ -413,7 +443,7 @@ button:active {
 }
 
 .word-bird {
-  text-shadow: 0.05rem 0.05rem 0 var(--black);
+  text-shadow: var(--text-shadow-default);
   white-space: nowrap;
 }
 .word-bird span {
