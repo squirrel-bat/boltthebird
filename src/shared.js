@@ -80,6 +80,7 @@ function createRandomPositionOffscreen(offset) {
 
 function createOppositeSidePositionOffscreen(startPos, offset) {
   const newPos = new PositionOffscreen()
+  // BUG: new pos angle fixing is sometimes producing steeper angles instead of flatter ones
   switch (startPos.side) {
     case RECTANGLE_SIDES.TOP:
       newPos.x = randomIntBetweenZeroAnd(100)
