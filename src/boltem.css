@@ -57,7 +57,7 @@ main {
   align-self: stretch;
 }
 .container-min-width {
-  width: 14rem;
+  width: 15rem;
   display: flex;
   flex-direction: inherit;
   gap: inherit;
@@ -86,7 +86,7 @@ header,
 }
 header {
   padding: calc(var(--bullet-size) / 4);
-  font-size: 2.5rem;
+  font-size: 3rem;
 }
 footer {
   display: flex;
@@ -267,14 +267,42 @@ footer {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   filter: drop-shadow(0.05rem 0.05rem var(--black));
-  animation: bird-letter 3s ease infinite;
+  transform-origin: bottom center;
+  animation: bird-letter 3s ease infinite 500ms;
 }
 #results {
+  position: relative;
   display: flex;
   flex-direction: column;
   font-size: 2rem;
   text-align: left;
   margin-bottom: 1.5rem;
+  padding: 0 0.5rem;
+  border-radius: 0.25rem;
+}
+#results:hover {
+  outline: 0.1rem dotted var(--white);
+}
+#results:hover:after {
+  content: '📋 Copy to Clipboard';
+  white-space: nowrap;
+  cursor: copy;
+  font-size: 1rem;
+  background: var(--blue);
+  padding: 0 0.25rem;
+  border-radius: 0.25rem;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  translate: -50% -70%;
+}
+#results:active:after {
+  content: '🚮 Carefully Copying your Results...' !important;
+  background: var(--blue) !important;
+}
+#results.visited:hover:after {
+  content: '✔ Copied to Clipboard';
+  background: var(--green);
 }
 #results .row {
   justify-content: space-between;

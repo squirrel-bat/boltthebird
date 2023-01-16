@@ -137,25 +137,6 @@ function formatSecondsToTimer(seconds) {
   return [m, s].join(':')
 }
 
-function countdownSecondsFrom(fromSeconds, element) {
-  return new Promise((resolve) => {
-    let diff
-    const start = Date.now()
-    // will start in a second, but...
-    const intervalID = setInterval(updateCounter, 500)
-    // we want the first run right now!
-    updateCounter()
-    function updateCounter() {
-      diff = fromSeconds - (((Date.now() - start) / 1000) | 0)
-      if (diff <= 0) {
-        clearInterval(intervalID)
-        resolve()
-      }
-      element.innerText = formatSecondsToTimer(diff)
-    }
-  })
-}
-
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms))
 }
@@ -187,7 +168,7 @@ export {
   randomIntBetweenZeroAnd,
   createRandomPositionOffscreen,
   createOppositeSidePositionOffscreen,
-  countdownSecondsFrom,
+  formatSecondsToTimer,
   sleep,
   movesToLeft,
   isNotActionShoot,

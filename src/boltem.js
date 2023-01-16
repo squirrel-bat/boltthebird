@@ -1,11 +1,12 @@
 import { Hand } from './hand.js'
 import { AnimationPlayer } from './animationPlayer.js'
 import { Bird } from './bird.js'
-import { countdownSecondsFrom, GAME_STATUS, sleep } from './shared.js'
+import { formatSecondsToTimer, GAME_STATUS, sleep } from './shared.js'
 import { Score } from './score.js'
 
 window.settings = {
-  GAME_DURATION_SECONDS: 60,
+  GAME_DURATION_SECONDS: 7,
+  UI_COOLDOWN: 2000,
   MAX_BIRDS_ON_SCREEN: 3,
   BIRD_TRAVEL_DURATION: 5000,
   BIRD_SPAWN_INITIAL_DELAY: 300,
@@ -13,6 +14,7 @@ window.settings = {
   DAMAGE_TEXT: '-3',
   AUDIO_MUTED: true,
   BGM_START: 0,
+  START_COUNTDOWN_AUDIO_AT: 4,
 }
 
 window.gameTracker = {
@@ -26,16 +28,20 @@ const statLabels = {
   escaped: 'Escaped:',
   missed: 'Missed Bolts:',
 }
+const hl = '------------------\n'
 
 window.copyResultsToClipboard = () => {
-  const res = Object.keys(window.gameTracker).map(
-    (key) =>
-      statLabels[key].padEnd(14) +
-      window.gameTracker[key].toString().padStart(4)
-  )
-  navigator.clipboard
-    .writeText(res.join('\n'))
-    .catch((reason) => console.error(reason))
+  const res = Object.keys(window.gameTracker)
+    .map(
+      (key) =>
+        statLabels[key].padEnd(14) +
+        window.gameTracker[key].toString().padStart(4)
+    )
+    .join('\n')
+
+  navigator.clipboard.writeText(res).catch((reason) => console.error(reason))
+
+  console.info('My Results:\n' + hl + res)
 }
 
 window.addEventListener(
@@ -45,12 +51,14 @@ window.addEventListener(
     const game = document.getElementById('game')
     const score = new Score(0)
     const hand = new Hand(new AnimationPlayer(), score)
+    const endSound = new Audio('./end.mp3')
+    const countSound = new Audio('./beep.mp3')
+    countSound.volume = 0.8
     const ambientSound = new Audio('./ambient_sea.mp3')
     ambientSound.volume = 0.9
     ambientSound.loop = true
     ambientSound.muted = window.settings.AUDIO_MUTED
     window.ambientSound = ambientSound
-
     const backgroundMusic = new Audio('./bgm.mp3')
     backgroundMusic.volume = 0.65
     backgroundMusic.currentTime = window.settings.BGM_START
@@ -71,6 +79,7 @@ window.addEventListener(
         .forEach((it) => it.classList.toggle('sound-off'))
       window.settings.AUDIO_MUTED = !window.settings.AUDIO_MUTED
       ambientSound.muted = window.settings.AUDIO_MUTED
+      backgroundMusic.muted = window.settings.AUDIO_MUTED
       await ambientSound.play()
     }
 
@@ -87,6 +96,46 @@ window.addEventListener(
 
     const handleGamePointerDown = async (event) => {
       await hand.shoot(event)
+    }
+
+    const repeatSoundEverySecond = (sound, repeats) => {
+      if (repeats <= 0) return false
+      if (!window.settings.AUDIO_MUTED) {
+        sound.pause()
+        sound.currentTime = 0
+        sound.play()
+      }
+      setTimeout(() => repeatSoundEverySecond(sound, repeats - 1), 1000)
+    }
+
+    const countdownSecondsFrom = (fromSeconds, element, countSound) => {
+      return new Promise((resolve) => {
+        let diff
+        let repeatStarted = false
+        const start = Date.now()
+        // will start in a second, but...
+        const intervalID = setInterval(updateCounter, 500)
+        // we want the first run right now!
+        updateCounter()
+        function updateCounter() {
+          diff = fromSeconds - (((Date.now() - start) / 1000) | 0)
+          if (diff <= 0) {
+            clearInterval(intervalID)
+            resolve()
+          }
+          if (
+            diff === window.settings.START_COUNTDOWN_AUDIO_AT &&
+            !repeatStarted
+          ) {
+            repeatSoundEverySecond(
+              countSound,
+              window.settings.START_COUNTDOWN_AUDIO_AT
+            )
+            repeatStarted = true
+          }
+          element.innerText = formatSecondsToTimer(diff)
+        }
+      })
     }
 
     async function startGame() {
@@ -115,7 +164,9 @@ window.addEventListener(
       // set and start the timer
       countdownSecondsFrom(
         window.settings.GAME_DURATION_SECONDS,
-        document.getElementById('timer-val')
+        document.getElementById('timer-val'),
+        countSound,
+        endSound
       ).then(endGame)
       // kick off the first wave of birds
       for (let i = 0; i < window.settings.MAX_BIRDS_ON_SCREEN; i++) {
@@ -137,7 +188,7 @@ window.addEventListener(
         it.setAttribute('disabled', 'disabled')
         setTimeout(() => {
           it.removeAttribute('disabled')
-        }, 3000)
+        }, window.settings.UI_COOLDOWN)
       })
       document.querySelectorAll('.bird').forEach((it) => it.remove())
       game.removeEventListener('pointerdown', handleGamePointerDown)
@@ -150,13 +201,16 @@ window.addEventListener(
             .querySelector('.score-value').innerText = window.gameTracker[key]
         } catch (_) {}
       })
-
+      document.getElementById('results').classList.remove('visited')
       document.getElementById('end-screen').classList.remove('display-none')
-      applauseSound.play()
-
       document
         .getElementById('restart-game')
         .addEventListener('click', startGame, { once: true })
+
+      if (!window.settings.AUDIO_MUTED) {
+        endSound.play()
+        applauseSound.play()
+      }
     }
   },
   { once: true }

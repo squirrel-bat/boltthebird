@@ -54,7 +54,10 @@
       <div class="game-menu">
         <h1 class="game-menu-title">Time's Up!</h1>
         <div class="container-min-width">
-          <div id="results">
+          <div
+            id="results"
+            onclick="window.copyResultsToClipboard(); this.classList.add('visited')"
+          >
             <div id="bolted-score" class="row">
               <div class="score-label">Bolted:</div>
               <div class="score-value">0</div>
