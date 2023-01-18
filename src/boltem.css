@@ -89,6 +89,9 @@ header {
   font-size: 3rem;
 }
 footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
   padding: calc(var(--bullet-size) / 2);
 }
 #magazine {

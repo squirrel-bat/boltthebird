@@ -388,16 +388,12 @@ button:active {
   background: var(--white-50);
 }
 .copyright {
-  position: absolute;
-  bottom: 0;
-  left: 0;
   gap: 0.4rem;
   font-size: 1.5rem;
   display: flex;
   flex-direction: row;
   justify-content: start;
   align-items: center;
-  width: 100vw;
   padding: 1rem;
   color: var(--white);
   text-shadow: var(--text-shadow-default);
