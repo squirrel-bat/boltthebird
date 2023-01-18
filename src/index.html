@@ -10,13 +10,14 @@
   <body>
     <nav class="row">
       <button
+        type="button"
         id="back-button"
         onclick="window.location.assign('')"
         class="menu-btn hidden"
       >
         < Take me back
       </button>
-      <button onclick="replayIntro()" class="menu-btn">
+      <button type="button" onclick="replayIntro()" class="menu-btn">
         <span class="icon">↺</span>Splash again!
       </button>
     </nav>
@@ -30,10 +31,11 @@
     </h1>
 
     <div id="route-start" data-route="start" class="fade-in display-none">
-      <button class="bg-blue-dark" onclick="callRoute('always')">
+      <button type="button" class="bg-blue-dark" onclick="callRoute('always')">
         Let's find out!
       </button>
       <button
+        type="button"
         class="menu-btn"
         onclick="window.open('https://articles.starcitygames.com/articles/this-is-precisely-why-you-still-always-bolt-the-bird/', '_blank')"
       >
@@ -55,10 +57,16 @@
           </div>
         </header>
         <div class="row">
-          <button onclick="answer(this)" data-next="2" class="answer bg-green">
+          <button
+            type="button"
+            onclick="answer(this)"
+            data-next="2"
+            class="answer bg-green"
+          >
             Yes
           </button>
           <button
+            type="button"
             onclick="answer(this)"
             data-next="3"
             class="answer bg-red-dark"
@@ -76,6 +84,7 @@
         </header>
         <div class="row">
           <button
+            type="button"
             onclick="answer(this)"
             data-next="wait"
             class="answer bg-green"
@@ -83,6 +92,7 @@
             Me
           </button>
           <button
+            type="button"
             onclick="answer(this)"
             data-next="bolt"
             class="answer bg-red-dark"
@@ -101,10 +111,16 @@
           </div>
         </header>
         <div class="row">
-          <button onclick="answer(this)" data-next="2" class="answer bg-green">
+          <button
+            type="button"
+            onclick="answer(this)"
+            data-next="2"
+            class="answer bg-green"
+          >
             Yes
           </button>
           <button
+            type="button"
             onclick="answer(this)"
             data-next="wait"
             class="answer bg-red-dark"
@@ -131,11 +147,15 @@
         </header>
 
         <div class="row">
-          <button class="bg-blue-dark" onclick="window.location.reload()">
+          <button
+            type="button"
+            class="bg-blue-dark"
+            onclick="window.location.reload()"
+          >
             <span class="icon">↺</span>Restart
           </button>
 
-          <button onclick="window.location.assign('boltem.html')">
+          <button type="button" onclick="window.location.assign('boltem.html')">
             Let's go! >
           </button>
         </div>
@@ -149,11 +169,15 @@
         </header>
 
         <div class="row">
-          <button class="bg-blue-dark" onclick="window.location.reload()">
+          <button
+            type="button"
+            class="bg-blue-dark"
+            onclick="window.location.reload()"
+          >
             <span class="icon">↺</span>Restart
           </button>
 
-          <button onclick="window.location.assign('boltem.html')">
+          <button type="button" onclick="window.location.assign('boltem.html')">
             Let me bolt something! >
           </button>
         </div>

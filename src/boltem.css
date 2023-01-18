@@ -261,8 +261,8 @@ footer {
 #end-screen .game-menu-title {
   background: linear-gradient(to bottom, var(--orange) 10%, var(--yellow) 110%);
   text-shadow: none;
-  background-clip: text;
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   filter: drop-shadow(0.05rem 0.05rem var(--black));
   transform-origin: bottom center;
