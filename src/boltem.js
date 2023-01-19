@@ -72,8 +72,6 @@ window.addEventListener(
     backgroundMusic.muted = window.settings.AUDIO_MUTED
     window.backgroundMusic = backgroundMusic
 
-    window.alert(document.body.clientWidth)
-
     window.toggleHelp = (reload = false) => {
       document.getElementById('start-screen').classList.toggle('display-none')
       document.getElementById('help-screen').classList.toggle('display-none')
