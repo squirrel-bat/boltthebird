@@ -28,6 +28,11 @@
     transform: translateY(-0.25rem);
   }
 }
+@keyframes hovering-flipped {
+  30% {
+    transform: translateY(0.25rem);
+  }
+}
 @keyframes bolt-T {
   0%,
   100% {
@@ -224,7 +229,7 @@
   }
 }
 :root {
-  --green-light: rgb(196, 211, 202);
+  --green-light: rgb(120, 220, 140);
   --green: rgb(14, 138, 55);
   --green-dark: rgb(0, 115, 62);
   --red-light: rgb(241, 201, 182);
@@ -260,6 +265,9 @@
   --questions-gap-y: 4rem;
   --questions-gap: var(--questions-gap-y) var(--questions-gap-x);
 }
+.text-green-light {
+  color: var(--green-light);
+}
 .text-green {
   color: var(--green);
 }
@@ -280,6 +288,9 @@
 }
 .bg-red-light {
   background-color: var(--red-light);
+}
+.text-blue {
+  color: var(--blue);
 }
 .bg-blue {
   background-color: var(--blue);
@@ -331,7 +342,7 @@ html {
   background-size: 100% 100%;
   background-attachment: var(--main-bg-attachment);
 }
-@media screen and (max-device-width: 480px) {
+@media screen and (max-device-width: 640px) {
   html {
     font-size: 1rem;
   }
@@ -394,7 +405,7 @@ button:active {
   flex-direction: row;
   justify-content: start;
   align-items: center;
-  padding: 1rem;
+  padding: 0.5rem;
   color: var(--white);
   text-shadow: var(--text-shadow-default);
 }

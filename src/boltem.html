@@ -32,6 +32,9 @@
           <button type="button" class="toggle-audio sound-off bg-blue-dark">
             Sound:
           </button>
+          <button type="button" id="show-help" class="menu-btn">
+            <span class="icon">ⓘ</span>Wait, <i>How do i play this?</i>
+          </button>
           <footer class="copyright">
             © 2023 <a href="https://ko-fi.com/squirrelbat">squirrel-bat</a>
           </footer>
@@ -39,17 +42,80 @@
       </div>
     </aside>
 
+    <aside id="help-screen" class="display-none fade-in scroll-spy">
+      <div class="game-menu">
+        <h1 class="game-menu-title scroll-top-end">How to Play</h1>
+        <div>
+          <h2>🏁 Goal: Bolt as many Birds as you can!</h2>
+          <p>
+            To bolt a Bird, just click / tap it!<br />Each bolt deals
+            <span class="text-red-dark">-3</span> Damage and is suffice to kill
+            the Bird.
+          </p>
+        </div>
+        <div>
+          <h2>
+            ⏰ <span class="text-blue">Timer</span>: That's how much Playtime
+            you have left!
+          </h2>
+          <p>
+            You get
+            <span class="text-blue">1:00 (a minute)</span>
+            to bolt as many Birds as you can! No pressure though.<br />
+            See <span class="text-blue">↗</span> of this screen? That's the
+            <span class="text-blue">Timer</span>!
+          </p>
+        </div>
+        <div>
+          <h2>
+            🐦 <span class="text-green-light">Score</span>: That's how many
+            Birds you have bolted!
+          </h2>
+          <p>
+            Each Bird gives
+            <span class="text-green-light">+1</span> point. Yupp,
+            <i>just one</i>.<br />
+            See <span class="text-green-light">↖</span> of this screen? That's
+            the <span class="text-green-light">Score</span>!
+          </p>
+        </div>
+        <div>
+          <h2>
+            <i class="bullet"></i> <span class="text-red">Mana Pool</span>:
+            That's your current mana!
+          </h2>
+          <p>
+            Each click / tap consumes one <i class="bullet"></i>. Don't worry,
+            it will reload the moment you run out!<br />
+            See <span class="text-red">⬇</span> of this screen? That's the
+            <span class="text-red">Mana Pool</span>!
+          </p>
+        </div>
+        <div class="container-min-width">
+          <button
+            type="button"
+            class="bg-blue-dark scroll-bottom-end"
+            onclick="window.toggleHelp()"
+          >
+            Got it!
+          </button>
+        </div>
+      </div>
+    </aside>
+
     <main id="game" class="display-none">
       <header>
         <div id="score"><span>🐦</span><span id="score-val">0</span></div>
-        <div id="timer"><span id="timer-val">0:00</span><span>⏱</span></div>
+        <div id="timer"><span id="timer-val">1:00</span><span>⏰</span></div>
       </header>
       <footer>
         <div id="magazine"></div>
       </footer>
     </main>
     <aside id="reload" class="display-none">
-      <div id="reload-text">Tapping for mana...</div>
+      <div id="reload-text">
+        Tapping for <span class="text-red">Mana…</span>
+      </div>
       <div id="mountains"></div>
     </aside>
 
@@ -69,18 +135,18 @@
         <div class="container-min-width">
           <div
             id="results"
-            onclick="window.copyResultsToClipboard(); this.classList.add('visited')"
+            onclick="(() => {this.classList.add('visited'); window.copyResultsToClipboard();})()"
           >
             <div id="bolted-score" class="row">
               <div class="score-label">Bolted:</div>
               <div class="score-value">0</div>
             </div>
-            <div id="escaped-score" class="row">
-              <div class="score-label">Escaped:</div>
-              <div class="score-value">0</div>
-            </div>
             <div id="missed-score" class="row">
               <div class="score-label">Missed Bolts:</div>
+              <div class="score-value">0</div>
+            </div>
+            <div id="escaped-score" class="row">
+              <div class="score-label">Escaped:</div>
               <div class="score-value">0</div>
             </div>
           </div>

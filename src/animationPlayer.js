@@ -87,9 +87,9 @@ export class AnimationPlayer {
     return true
   }
 
-  async reloadMagazine(amount) {
+  async reloadMagazine(amount, onlyHUD = false) {
     await Promise.all([
-      this.#playReloadAnim(amount),
+      onlyHUD === true ? Promise.resolve() : this.#playReloadAnim(amount),
       this.updateMagazineHUD(amount, true),
     ])
   }

@@ -82,12 +82,11 @@ export class Bird {
     )
     this.#element.animation = animation
     const birdInner = this.#element.querySelector('.bird-inner')
-    if (movesToLeft(from, to)) {
-      birdInner.classList.add('bird-flip-y')
-    }
-    if (randomBoolFromManyRandomBools(3, true)) {
-      birdInner.classList.add('spinning')
-    }
+    birdInner.classList.toggle('bird-flip-y', movesToLeft(from, to))
+    birdInner.classList.toggle(
+      'spinning',
+      randomBoolFromManyRandomBools(3, true)
+    )
 
     animation.addEventListener('finish', () => {
       try {

@@ -78,11 +78,11 @@ export class Hand {
     return this.AnimPlayer.updateMagazineHUD(this.rounds)
   }
 
-  reload() {
+  reload(onlyHUD = false) {
     if (this.status !== MAG_STATUS.IDLE) return false
     this.status = MAG_STATUS.RELOADING
     this.#rounds = window.settings.MAGAZINE_SIZE
-    this.AnimPlayer.reloadMagazine(this.rounds).then((_) => {
+    this.AnimPlayer.reloadMagazine(this.rounds, onlyHUD).then((_) => {
       this.status = MAG_STATUS.IDLE
     })
   }

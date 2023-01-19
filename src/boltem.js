@@ -5,7 +5,7 @@ import { formatSecondsToTimer, GAME_STATUS, sleep } from './shared.js'
 import { Score } from './score.js'
 
 window.settings = {
-  GAME_DURATION_SECONDS: 60,
+  GAME_DURATION_SECONDS: 3,
   UI_COOLDOWN: 2000,
   MAX_BIRDS_ON_SCREEN: 3,
   BIRD_TRAVEL_DURATION: 5000,
@@ -25,8 +25,8 @@ window.gameTracker = {
 
 const statLabels = {
   bolted: 'Bolted:',
-  escaped: 'Escaped:',
   missed: 'Missed Bolts:',
+  escaped: 'Escaped:',
 }
 const hl = '------------------\n'
 
@@ -72,6 +72,15 @@ window.addEventListener(
     backgroundMusic.muted = window.settings.AUDIO_MUTED
     window.backgroundMusic = backgroundMusic
 
+    window.alert(document.body.clientWidth)
+
+    window.toggleHelp = (reload = false) => {
+      document.getElementById('start-screen').classList.toggle('display-none')
+      document.getElementById('help-screen').classList.toggle('display-none')
+      document.getElementById('game').classList.toggle('display-none')
+      if (reload === true) hand.reload(true)
+    }
+
     document
       .getElementById('start-game')
       .addEventListener('click', startGame, { once: true })
@@ -79,6 +88,28 @@ window.addEventListener(
     document
       .querySelectorAll('.toggle-audio')
       .forEach((it) => it.addEventListener('click', toggleMuted))
+
+    document
+      .getElementById('show-help')
+      .addEventListener('click', () => window.toggleHelp(true))
+
+    document.querySelectorAll('.scroll-spy').forEach((it) => {
+      const topEndElement = it.querySelector('.scroll-top-end')
+      const bottomEndElement = it.querySelector('.scroll-bottom-end')
+      const opts = {
+        root: it.firstElementChild,
+        threshold: 0.2,
+      }
+      const topObserver = new IntersectionObserver((some) => {
+        it.classList.toggle('show-up', !some[0].isIntersecting)
+      }, opts)
+      const bottomObserver = new IntersectionObserver((some) => {
+        it.classList.toggle('show-down', !some[0].isIntersecting)
+      }, opts)
+
+      topObserver.observe(topEndElement)
+      bottomObserver.observe(bottomEndElement)
+    })
 
     async function toggleMuted() {
       document
