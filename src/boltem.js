@@ -31,6 +31,7 @@ const statLabels = {
 const hl = '------------------\n'
 
 window.copyResultsToClipboard = () => {
+  const sound = new Audio('./copy_cam.mp3')
   const res = Object.keys(window.gameTracker)
     .map(
       (key) =>
@@ -38,6 +39,12 @@ window.copyResultsToClipboard = () => {
         window.gameTracker[key].toString().padStart(4)
     )
     .join('\n')
+
+  sound.pause()
+  sound.currentTime = 0
+  if (!window.settings.AUDIO_MUTED) {
+    sound.play().catch((_) => {})
+  }
 
   navigator.clipboard.writeText(res).catch((reason) => console.error(reason))
 
