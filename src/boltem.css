@@ -42,6 +42,7 @@ main {
   left: 0;
   transform: translateY(-50%);
   width: 100vw;
+  max-width: 100%;
   padding: 1rem;
   display: flex;
   flex-direction: column;
@@ -122,6 +123,7 @@ footer {
   top: 50%;
   left: 0;
   width: 100vw;
+  max-width: 100%;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -139,6 +141,7 @@ footer {
   justify-content: center;
   align-items: center;
   width: 100vw;
+  max-width: 100%;
 }
 .mountain {
   display: inline-block;
@@ -362,4 +365,7 @@ footer {
 }
 .score-value {
   font-size: 2.5rem;
+}
+.copyright {
+  justify-content: center;
 }
