@@ -5,7 +5,7 @@ import { formatSecondsToTimer, GAME_STATUS, sleep } from './shared.js'
 import { Score } from './score.js'
 
 window.settings = {
-  GAME_DURATION_SECONDS: 3,
+  GAME_DURATION_SECONDS: 60,
   UI_COOLDOWN: 2000,
   MAX_BIRDS_ON_SCREEN: 3,
   BIRD_TRAVEL_DURATION: 5000,
