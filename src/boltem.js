@@ -144,7 +144,7 @@ window.addEventListener(
       setTimeout(() => repeatSoundEverySecond(sound, repeats - 1), 1000)
     }
 
-    const countdownSecondsFrom = (fromSeconds, element, countSound) => {
+    const countdownSecondsFrom = (fromSeconds, text, countSound) => {
       return new Promise((resolve) => {
         let diff
         let repeatStarted = false
@@ -169,7 +169,7 @@ window.addEventListener(
             )
             repeatStarted = true
           }
-          element.innerText = formatSecondsToTimer(diff)
+          text.innerText = formatSecondsToTimer(diff)
         }
       })
     }

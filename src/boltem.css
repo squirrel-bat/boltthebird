@@ -36,15 +36,24 @@ main {
 
   cursor: default;
 }
+#start-screen,
+#help-screen,
+#end-screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
 .top-menu {
   text-align: left;
   padding: 0.5rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 9999;
 }
 .game-menu {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  transform: translateY(-50%);
   width: 100vw;
   max-width: 100%;
   padding: 1rem;
