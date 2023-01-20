@@ -88,6 +88,12 @@ main {
 
   cursor: default;
 }
+#help-screen .help-back {
+  position: absolute;
+  top: 4.5rem;
+  left: 0.5rem;
+  z-index: 9999;
+}
 #help-screen .game-menu {
   --help-gap: 1.5rem;
   gap: var(--help-gap);
@@ -138,7 +144,7 @@ header,
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  gap: 1rem;
+  gap: 0.5rem;
 }
 #game {
   display: flex;
@@ -430,4 +436,5 @@ footer {
 }
 .copyright {
   justify-content: center;
+  padding-top: 1rem;
 }

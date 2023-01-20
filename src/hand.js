@@ -18,11 +18,11 @@ export class Hand {
     if (this.status !== MAG_STATUS.IDLE || isNotActionShoot(event)) return false
     --this.#rounds
 
-    const body = document.querySelector('body')
-    body.addEventListener('animationend', (e) => {
-      if (e.target === body) body.classList.remove('shake')
+    const game = document.getElementById('game')
+    game.addEventListener('animationend', (e) => {
+      if (e.target === game) game.classList.remove('shake')
     })
-    body.classList.add('shake')
+    game.classList.add('shake')
 
     if (
       typeof target?.element !== 'undefined' &&
