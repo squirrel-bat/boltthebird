@@ -5,16 +5,16 @@ import { formatSecondsToTimer, GAME_STATUS, sleep } from './shared.js'
 import { Score } from './score.js'
 
 window.settings = {
-  GAME_DURATION_SECONDS: 60,
-  UI_COOLDOWN: 2000,
-  MAX_BIRDS_ON_SCREEN: 3,
-  BIRD_TRAVEL_DURATION: 5000,
-  BIRD_SPAWN_INITIAL_DELAY: 300,
-  MAGAZINE_SIZE: 7,
-  DAMAGE_TEXT: '-3',
   AUDIO_MUTED: true,
   BGM_START: 0,
-  START_COUNTDOWN_AUDIO_AT: 4,
+  MAX_BIRDS_ON_SCREEN: 3,
+  BIRD_SPAWN_INITIAL_DELAY: 300,
+  BIRD_TRAVEL_DURATION: 5000,
+  MAGAZINE_SIZE: 7,
+  DAMAGE_TEXT: '-3',
+  GAME_DURATION_SECONDS: 60,
+  START_COUNTDOWN_AUDIO_AT: 3,
+  UI_COOLDOWN: 2000,
 }
 
 window.gameTracker = {
@@ -95,7 +95,7 @@ window.addEventListener(
       const topEndElement = it.querySelector('.scroll-top-end')
       const bottomEndElement = it.querySelector('.scroll-bottom-end')
       const opts = {
-        root: it.firstElementChild,
+        root: it,
         threshold: 0.2,
       }
       const topObserver = new IntersectionObserver((some) => {

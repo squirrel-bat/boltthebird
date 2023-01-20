@@ -30,7 +30,7 @@ export class Bird {
     {
       src: './bird_d.png',
       sound: './toy.mp3',
-      volume: 0.6,
+      volume: 0.8,
     },
   ]
 

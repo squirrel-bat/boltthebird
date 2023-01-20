@@ -96,8 +96,8 @@ main {
   overflow-y: auto !important;
   translate: 0 0.5rem;
 }
-#help-screen:before,
-#help-screen:after {
+.scroll-spy:before,
+.scroll-spy:after {
   z-index: -1;
   font-size: 3rem;
   opacity: 0.25;
@@ -105,15 +105,17 @@ main {
   left: 50%;
   animation: hovering 2s ease-out infinite;
 }
-#help-screen.show-up:before {
+.scroll-spy.show-up:before {
   content: '▲';
   top: 0;
   translate: -50% 100%;
+  scale: 2 1;
 }
-#help-screen.show-down:after {
+.scroll-spy.show-down:after {
   content: '▼';
   bottom: 0.4rem;
   translate: -50% -100%;
+  scale: 2 1;
   animation-name: hovering-flipped;
 }
 #help-screen .game-menu-title {

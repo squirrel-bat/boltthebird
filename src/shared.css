@@ -304,6 +304,9 @@
 .bg-black-50 {
   background-color: var(--black-50);
 }
+.text-center {
+  text-align: center !important;
+}
 .text-shadow-none {
   text-shadow: none;
 }
