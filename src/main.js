@@ -216,9 +216,12 @@ window.addEventListener(
       },
       (_reject) => {}
     )
+    let timeout = 0
+    window.addEventListener('resize', () => {
+      clearTimeout(timeout)
+      // start timing for event "completion"
+      timeout = setTimeout(drawLines, 166)
+    })
   },
   { once: true }
 )
-window.addEventListener('resize', () => {
-  drawLines()
-})
