@@ -2,3 +2,7 @@
   font-family: 'AmaticSC';
   src: url('AmaticSC-Regular.ttf');
 }
+@font-face {
+  font-family: 'Lora';
+  src: url('Lora-Medium.ttf');
+}

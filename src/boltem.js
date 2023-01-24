@@ -51,6 +51,12 @@ window.copyResultsToClipboard = () => {
   console.info('My Results:\n' + hl + res)
 }
 
+window.toggleSummary = () => {
+  document
+    .querySelectorAll('.results')
+    .forEach((it) => it.classList.toggle('display-none'))
+}
+
 window.addEventListener(
   'load',
   async () => {
@@ -107,6 +113,15 @@ window.addEventListener(
 
       topObserver.observe(topEndElement)
       bottomObserver.observe(bottomEndElement)
+    })
+
+    document.querySelectorAll('.card').forEach((it) => {
+      it.ontouchstart = (elem) => {
+        document
+          .querySelectorAll('.card')
+          .forEach((it) => it.classList.remove('hover'))
+        elem.currentTarget.classList.add('hover')
+      }
     })
 
     async function toggleMuted() {
@@ -233,11 +248,14 @@ window.addEventListener(
       Object.keys(window.gameTracker).forEach((key) => {
         try {
           document
-            .getElementById(`${key}-score`)
-            .querySelector('.score-value').innerText = window.gameTracker[key]
+            .querySelectorAll(`.${key}-score .score-value`)
+            .forEach((it) => (it.innerText = window.gameTracker[key]))
         } catch (_) {}
       })
-      document.getElementById('results').classList.remove('visited')
+      document
+        .querySelectorAll('.results')
+        .forEach((it) => it.classList.remove('visited'))
+
       document.getElementById('end-screen').classList.remove('display-none')
       document
         .getElementById('restart-game')

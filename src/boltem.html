@@ -143,22 +143,52 @@
         <h1 class="game-menu-title">Time's Up!</h1>
         <div class="container-min-width">
           <div
-            id="results"
+            class="results table display-none"
             onclick="(() => {this.classList.add('visited'); window.copyResultsToClipboard();})()"
           >
-            <div id="bolted-score" class="row">
+            <div class="bolted-score row">
               <div class="score-label">Bolted:</div>
               <div class="score-value">0</div>
             </div>
-            <div id="missed-score" class="row">
+            <div class="missed-score row">
               <div class="score-label">Missed Bolts:</div>
               <div class="score-value">0</div>
             </div>
-            <div id="escaped-score" class="row">
+            <div class="escaped-score row">
               <div class="score-label">Escaped:</div>
               <div class="score-value">0</div>
             </div>
           </div>
+
+          <div class="results cards row">
+            <div class="missed-score card">
+              <div class="score-label">Missed Bolts</div>
+              <div class="card-body">
+                <div class="score-value">0</div>
+              </div>
+            </div>
+            <div class="bolted-score card">
+              <div class="score-label">Bolted</div>
+              <div class="card-body">
+                <div class="score-value">0</div>
+              </div>
+            </div>
+            <div class="escaped-score card">
+              <div class="score-label">Escaped</div>
+              <div class="card-body">
+                <div class="score-value">0</div>
+              </div>
+            </div>
+          </div>
+
+          <button
+            type="button"
+            class="menu-btn summary-toggle"
+            onclick="toggleSummary()"
+          >
+            <span class="icon">🔁</span>Toggle Style!
+          </button>
+
           <button type="button" id="restart-game">
             <span class="icon">↺</span>Play Again!
           </button>

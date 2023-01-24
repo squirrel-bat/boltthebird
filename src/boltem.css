@@ -348,20 +348,24 @@ footer {
   transform-origin: bottom center;
   animation: bird-letter 3s ease infinite 500ms;
 }
-#results {
+.copyright {
+  justify-content: center;
+  padding-top: 1rem;
+}
+
+.table.results {
   position: relative;
   display: flex;
   flex-direction: column;
   font-size: 2rem;
   text-align: left;
-  margin-bottom: 1.5rem;
-  padding: 0 0.5rem;
+  padding: 1.66rem 0.5rem;
   border-radius: 0.25rem;
 }
-#results:hover {
+.table.results:hover {
   outline: 0.1rem dotted var(--white);
 }
-#results:hover:after {
+.table.results:hover:after {
   content: '📋 Copy to Clipboard';
   white-space: nowrap;
   cursor: copy;
@@ -374,7 +378,7 @@ footer {
   left: 50%;
   translate: -50% -70%;
 }
-#results:active:after {
+.table.results:active:after {
   content: '🚮 Carefully Copying your Results...' !important;
   background: var(--blue) !important;
   white-space: nowrap;
@@ -387,24 +391,24 @@ footer {
   left: 50%;
   translate: -50% -70%;
 }
-#results.visited:hover:after {
+.table.results.visited:hover:after {
   content: '✔ Copied to Clipboard';
   background: var(--green);
 }
-#results .row {
+.table.results .row {
   justify-content: space-between;
   border-bottom: 0.1rem dashed var(--white-50);
 }
-#results .row:last-child {
+.table.results .row:last-child {
   border-bottom: none;
 }
-.score-label {
+.table .score-label {
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 0.25rem;
 }
-.score-label:before {
+.table .score-label:before {
   content: '';
   display: inline-block;
   height: 1.8rem;
@@ -413,37 +417,167 @@ footer {
   border-radius: 0.25rem;
   filter: drop-shadow(0.05rem 0.05rem 0 var(--black-50));
 }
-#bolted-score {
+.table .bolted-score {
   cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" style="font-size: 32px; text-shadow: 0.025rem 0.025rem 0 black;" height="64" width="64"><text y="32" x="0">🐦</text></svg>')
       16 16,
     pointer;
 }
-#bolted-score .score-label:before {
+.table .bolted-score .score-label:before {
   background: url('bolted.gif') no-repeat 40% 0;
   background-size: auto 1.8rem;
 }
-#escaped-score {
+.table .escaped-score {
   cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" style="font-size: 32px; text-shadow: 0.025rem 0.025rem 0 black;" height="64" width="64"><text y="32" x="0">💨</text></svg>')
       16 16,
     pointer;
 }
-#escaped-score .score-label:before {
+.table .escaped-score .score-label:before {
   background: url('escaped.gif') no-repeat 0 20%;
   background-size: auto 2.2rem;
 }
-#missed-score {
+.table .missed-score {
   cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" style="font-size: 32px; text-shadow: 0.025rem 0.025rem 0 black;" height="64" width="64"><text y="32" x="0">👀</text></svg>')
       16 16,
     pointer;
 }
-#missed-score .score-label:before {
+.table .missed-score .score-label:before {
   background: url('missed.gif') no-repeat 75% 0;
   background-size: auto 2.4rem;
 }
-.score-value {
+.table .score-value {
   font-size: 2.5rem;
 }
-.copyright {
-  justify-content: center;
-  padding-top: 1rem;
+
+.cards.results {
+  --card-height: 13rem;
+  --card-border-width: 0.03;
+  height: var(--card-height);
+  padding-bottom: 0.5rem;
+}
+.card {
+  z-index: 2;
+  font-size: calc(var(--card-height) * 0.1);
+  position: absolute;
+  aspect-ratio: 2.5 / 3.5;
+  height: var(--card-height);
+  background: url('https://cards.scryfall.io/large/front/5/2/52c79d57-a8eb-427d-86ac-b203c0bb7cda.jpg')
+    center;
+  background-size: auto 100%;
+  border-radius: calc(var(--card-height) * var(--card-border-width));
+  transform: perspective(10rem) translate3d(0, 0, -1rem) rotateZ(-2deg);
+  transform-origin: center;
+  transition: transform 400ms ease;
+}
+.card:first-child {
+  z-index: 1;
+  translate: -30% 0;
+  transform: perspective(10rem) translate3d(0, 0, -1rem) rotateZ(-8deg);
+}
+.card:last-child {
+  z-index: 1;
+  translate: 30% 0;
+  transform: perspective(10rem) translate3d(0, 0, -1rem) rotateZ(8deg);
+}
+.card:hover,
+.card.hover {
+  z-index: 9999;
+  transform: perspective(10rem) translate3d(0, 0, 0) rotateZ(0);
+}
+.card .score-label {
+  position: absolute;
+  top: 5%;
+  left: 7%;
+  font-family: 'Lora', sans-serif;
+  font-size: 0.5rem;
+  line-height: 0.6rem;
+  font-weight: bold;
+  text-align: left;
+  color: var(--black);
+  text-shadow: none;
+  background: var(--red-light);
+  padding: 0 0.1rem;
+  width: 86%;
+}
+.card:before {
+  content: '';
+  height: 44.6%;
+  width: 86%;
+  position: absolute;
+  top: 11%;
+  left: 7%;
+}
+.card:after {
+  content: 'Score — Total';
+  font-family: 'Lora', sans-serif;
+  font-size: 0.4rem;
+  line-height: 0.55rem;
+  font-weight: bold;
+  text-align: left;
+  color: var(--black);
+  text-shadow: none;
+  padding: 0 0.1rem;
+  box-sizing: border-box;
+
+  width: 86.2%;
+  position: absolute;
+  top: 57%;
+  left: 7%;
+  background: var(--red-light);
+}
+.card .score-value {
+  font-size: calc(var(--card-height) * 0.24);
+}
+.card-body {
+  position: absolute;
+  bottom: 7.5%;
+  left: 7%;
+  color: var(--red-alert);
+  background: var(--red);
+  text-shadow: -0.05rem 0.1rem 0.1rem var(--black),
+    0.05rem -0.1rem 0.1rem var(--white-50);
+  width: 86%;
+  height: 30%;
+}
+.card-body:before {
+  content: '⚡';
+  z-index: 1;
+  font-size: 0.4rem;
+  text-shadow: none;
+  position: absolute;
+  top: -0.7rem;
+  right: 0;
+  color: black;
+  filter: grayscale(1) brightness(0);
+}
+.card.bolted-score {
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" style="font-size: 32px; text-shadow: 0.025rem 0.025rem 0 black;" height="64" width="64"><text y="32" x="0">🐦</text></svg>')
+      16 16,
+    pointer;
+}
+.card.bolted-score:before {
+  background: url('bolted.gif') no-repeat center;
+  background-size: cover;
+}
+.card.escaped-score {
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" style="font-size: 32px; text-shadow: 0.025rem 0.025rem 0 black;" height="64" width="64"><text y="32" x="0">💨</text></svg>')
+      16 16,
+    pointer;
+}
+.card.escaped-score:before {
+  background: url('escaped.gif') no-repeat center;
+  background-size: cover;
+}
+.card.missed-score {
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" style="font-size: 32px; text-shadow: 0.025rem 0.025rem 0 black;" height="64" width="64"><text y="32" x="0">👀</text></svg>')
+      16 16,
+    pointer;
+}
+.card.missed-score:before {
+  background: url('missed.gif') no-repeat center;
+  background-size: cover;
+}
+
+.summary-toggle {
+  margin-bottom: 1rem;
+  align-self: center;
 }
