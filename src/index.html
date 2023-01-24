@@ -31,9 +31,19 @@
     </h1>
 
     <div id="route-start" data-route="start" class="fade-in display-none">
-      <button type="button" class="bg-blue-dark" onclick="callRoute('always')">
-        Let's find out!
-      </button>
+      <div class="row">
+        <button type="button" onclick="callRoute('always')">
+          Let's find out!
+        </button>
+        <span>or</span>
+        <button
+          type="button"
+          class="bg-blue-dark"
+          onclick="window.location.assign('boltem.html')"
+        >
+          Just here to bolt!
+        </button>
+      </div>
       <button
         type="button"
         class="menu-btn"
@@ -111,6 +121,13 @@
           <div class="question">
             <div class="question-content">
               Is there at least one other mana dork on the Battlefield?
+              <button
+                type="button"
+                class="menu-btn"
+                onclick="window.open('https://boardgames.stackexchange.com/a/49244', '_blank')"
+              >
+                <span class="icon">ⓘ</span>What's a Mana Dork?
+              </button>
             </div>
           </div>
         </header>

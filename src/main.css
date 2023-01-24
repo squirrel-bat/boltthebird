@@ -17,6 +17,7 @@ main {
 }
 nav {
   justify-content: space-between !important;
+  padding: 0.5rem;
 }
 .island {
   position: var(--island-pos);
