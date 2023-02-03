@@ -31,9 +31,7 @@ nav {
   --island-sand: var(--sand);
   background: var(--island-bg);
   box-shadow: 0.05rem 0.15rem 0 var(--island-sand);
-
   filter: drop-shadow(0 0.05rem 0 var(--blue-50));
-
   --start-pos: -13rem;
   animation: island 1.5s ease-in-out;
 }
@@ -151,69 +149,14 @@ nav {
   transform: translateX(-101vw);
   animation: title 0.5s ease-in 1.5s forwards;
 }
-#site-title.skip-animation {
-  transform: none !important;
-  animation: none !important;
-}
+
 #route-start {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1rem;
 }
-main,
-.step {
-  display: flex;
-  flex-direction: column;
-  justify-content: start;
-  align-items: center;
-  gap: var(--questions-gap);
-}
-.step[data-id='bolt'],
-.step[data-id='wait'] {
-  gap: calc(var(--questions-gap-y) / 2) var(--questions-gap-x);
-}
-.question {
-  position: relative;
-  border-radius: 0.5rem;
-  box-shadow: 0.1rem 0.15rem 0 var(--black-50);
-}
-.struck.active {
-  color: var(--white) !important;
-  text-shadow: var(--text-shadow-default);
-  box-shadow: 0.1rem 0.15rem 0 var(--orange) !important;
 
-  animation: shaking 0.05s linear 10 !important;
-}
-.struck.active .question-content {
-  background: var(--yellow) !important;
-  box-shadow: 0.2rem 0.1rem 0 -0.15rem var(--orange) !important;
-}
-.struck.active::before,
-.struck.active::after {
-  animation: none !important;
-  transform: scale(4, 0.7) translateY(-50%) !important;
-  background: var(--yellow) !important;
-}
-.question-content {
-  user-select: none !important;
-  font-size: 1.25rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  min-height: 4rem;
-  width: auto;
-  height: auto;
-  max-width: 14rem;
-  padding: 0.5rem 1rem;
-  font-weight: bold;
-  border-radius: 0.5rem;
-  background: var(--white-50);
-  position: relative;
-  z-index: 1;
-  gap: calc(var(--questions-gap-x) / 2);
-}
 figure,
 img {
   position: relative;
@@ -223,109 +166,7 @@ img {
   border-radius: 0.66rem;
   overflow: hidden;
 }
-.question.active {
-  z-index: 1;
-  box-shadow: 0.1rem 0.15rem 0 var(--red-dark);
-  animation: hovering 2s ease-in-out 0.25s infinite;
-  cursor: crosshair;
-}
-.question.active .question-content {
-  background: linear-gradient(
-    to bottom,
-    var(--red-dark) -50%,
-    var(--orange) 20%,
-    var(--yellow) 110%
-  );
-  box-shadow: 0.2rem 0.1rem 0 -0.15rem var(--red-dark);
-}
-.question.active::before,
-.question.active::after {
-  content: '';
-  position: absolute;
-  top: 40%;
-  width: 2rem;
-  height: 2rem;
-  box-shadow: 0 0.1rem 0 var(--orange);
-  --wing-scale: scale(2.5, 1);
-  transform: translate(calc(var(--wing-side) * -90%), -50%) var(--wing-scale);
-  animation: wing 2s ease-in-out infinite;
-}
-.question.active::before {
-  left: 0;
-  border-radius: 0.1rem 0.5rem 0.1rem 2rem;
-  background: linear-gradient(200deg, var(--red-dark) -15%, var(--yellow) 80%);
-  --wing-side: 1;
-  transform-origin: 100% 0.5rem;
-}
-.question.active::after {
-  right: 0;
-  border-radius: 0.5rem 0.1rem 2rem 0.1rem;
-  background: linear-gradient(160deg, var(--red-dark) -15%, var(--yellow) 80%);
-  --wing-side: -1;
-  transform-origin: 0 0.5rem;
-}
-/* EYES */
-.question.active:hover .question-content::before,
-.question.active:hover .question-content::after {
-  content: '⬤';
-  position: absolute;
-  top: -0.75rem;
-  left: 50%;
-  height: 1.5rem;
-  width: 1.5rem;
-  font-size: 1rem;
-  text-align: left;
-  border-radius: 99rem;
-  background: radial-gradient(#fff 50%, var(--sand));
-  box-shadow: 0 0 0.1rem var(--black-50);
-  transform-origin: center;
-  transform: var(--eye-translate) var(--eye-rotation);
-  animation: googly-eye 1.5s linear infinite;
-}
-.question.active:hover .question-content::before {
-  --eye-translate: translateX(-150%);
-  --eye-rotation: -0.4turn;
-  --eye-side: 1;
-}
-.question.active:hover .question-content::after {
-  --eye-translate: translateX(50%);
-  --eye-rotation: 0.5turn;
-  --eye-side: -1;
-}
-.answer {
-  z-index: 666;
-}
-.answer.static {
-  font-size: 1.2rem;
-  font-weight: bold;
-  min-width: 3rem;
-  padding: 0.12rem 0.6rem;
-  background: var(--blue-light);
-  border-radius: 0.25rem;
-  box-shadow: 0.075rem 0.1rem 0 var(--black-50);
-}
-.svg-lines {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: inherit;
-  width: inherit;
-  pointer-events: none !important;
-}
-.svg-lines path,
-.svg-lines polygon {
-  stroke: var(--blue-light);
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-width: 0.2rem;
-  filter: drop-shadow(0.1rem 0.1rem var(--black-50));
-}
-.line {
-  fill: none;
-}
-.arrow-head {
-  fill: var(--blue-light);
-}
+
 .copyright {
   position: absolute;
   bottom: 0;
