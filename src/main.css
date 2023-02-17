@@ -3,18 +3,19 @@
   min-height: 100%;
 }
 
+html,
 body {
   position: relative;
-}
-html,
-body,
-main {
   min-height: 100vh;
   overflow-x: hidden !important;
 }
-main {
-  padding: 1rem 0.5rem 5rem;
-  position: relative;
+body {
+  display: flex;
+  flex-direction: column;
+}
+.copyright {
+  /* align-self to end of main flex axis. I have no regrets. */
+  margin-top: auto;
 }
 nav {
   justify-content: space-between !important;
@@ -168,20 +169,12 @@ img {
   overflow: hidden;
 }
 
-.copyright {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100vw;
-  max-width: 100%;
-}
-
 #clippy {
   --clippy-border: 0.2rem solid var(--grey);
-  position: absolute;
-  left: 50%;
-  top: 0;
-  translate: -50% 100%;
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  translate: -50% 0;
   height: 3.2rem;
   width: 1.85rem;
   border-bottom-left-radius: 1rem;
@@ -189,6 +182,25 @@ img {
   border: var(--clippy-border);
   border-top: none;
   filter: drop-shadow(0.075rem 0.1rem 0 var(--black-50));
+  transform-origin: bottom center;
+  transform: translateX(5rem);
+  animation: enter-from-right 5s ease-out forwards 2s;
+}
+@keyframes enter-from-right {
+  0% {
+    transform: translateX(5rem);
+  }
+  10%,
+  30% {
+    transform: translateX(5rem) rotateZ(-30deg);
+  }
+  35%,
+  70% {
+    transform: translateX(5rem) rotateZ(5deg);
+  }
+  100% {
+    transform: translateX(0) rotateZ(0);
+  }
 }
 
 #clippy:before {
@@ -266,4 +278,63 @@ img {
   100% {
     rotate: z 360deg;
   }
+}
+
+#clippy-text {
+  position: absolute;
+  top: 0;
+  right: 0;
+  translate: 1rem calc((100% + 4rem) * -1);
+  z-index: 1;
+  font-family: system-ui;
+  font-weight: normal;
+  font-size: 0.5rem;
+  line-height: 0.7rem;
+  text-shadow: none;
+  background: var(--yellow-note);
+  border: 1px solid black;
+  border-radius: 0.4rem;
+  padding: 0.25rem;
+  width: 7rem;
+  text-align: left;
+  opacity: 0;
+  animation: fade-in 500ms ease-out forwards 7s;
+}
+#clippy-text:after {
+  content: '';
+  position: absolute;
+  right: 3rem;
+  scale: 0.75 1;
+  bottom: -0.7rem;
+  border: 0.4rem solid var(--yellow-note);
+  border-bottom-color: transparent;
+  border-left-color: transparent;
+  filter: drop-shadow(1px 2px 0 black);
+}
+.clippy-buttons {
+  padding-top: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+}
+.clippy-buttons button {
+  display: inline-block;
+  font: inherit;
+  color: inherit;
+  text-shadow: none;
+  background: none;
+  box-shadow: none;
+  min-width: 2.5rem;
+  border: 1px solid var(--grey-light);
+  border-radius: 0.125rem;
+}
+
+.clippy-buttons button:hover,
+.clippy-buttons button:active {
+  transform: none !important;
+  border-color: var(--grey-dark);
+}
+
+main {
+  padding: 1rem 0.5rem 5rem;
+  position: relative;
 }
