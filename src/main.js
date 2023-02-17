@@ -15,15 +15,6 @@ const ROUTES = [
       document.getElementById('back-button').classList.add('hidden')
       window.location.hash = 'always'
       showPage('always')
-
-      document.querySelectorAll('.question').forEach((q) => {
-        q.addEventListener('click', (e) =>
-          e.currentTarget.classList.add('struck')
-        )
-        q.addEventListener('animationend', (e) =>
-          e.currentTarget.classList.remove('struck')
-        )
-      })
       document.getElementById('back-button').classList.remove('hidden')
     },
   },
