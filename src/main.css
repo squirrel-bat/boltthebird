@@ -171,6 +171,7 @@ img {
 
 #clippy {
   --clippy-border: 0.2rem solid var(--grey);
+  z-index: 9999;
   position: fixed;
   right: 1rem;
   bottom: 1rem;
@@ -206,7 +207,7 @@ img {
 #clippy:before {
   content: '';
   position: absolute;
-  top: -3rem;
+  top: -2.9rem;
   left: -0.2rem;
   height: 2.8rem;
   width: 1.2rem;
@@ -330,11 +331,74 @@ img {
 
 .clippy-buttons button:hover,
 .clippy-buttons button:active {
-  transform: none !important;
   border-color: var(--grey-dark);
 }
 
 main {
-  padding: 1rem 0.5rem 5rem;
   position: relative;
+}
+
+article {
+  text-align: left;
+  margin: 0 auto;
+  padding: 0.5rem 1rem;
+  max-width: 22rem;
+  border-radius: 0.25rem;
+  background: var(--white-50);
+  box-shadow: 0.075rem 0.1rem 0 var(--black-50);
+}
+
+#toc {
+  --toc-font-size: 0.5rem;
+  padding-bottom: 1rem;
+}
+#toc-content {
+  overflow-y: scroll;
+  max-height: 14rem;
+  padding: 0.5rem;
+  margin: 1rem;
+  border: 2px inset var(--grey-light);
+  background: var(--white);
+  font-family: serif;
+  font-weight: normal;
+  font-size: var(--toc-font-size);
+}
+#toc-content h2 {
+  text-align: center;
+  font-size: 1rem;
+  margin-bottom: calc(var(--toc-font-size) * 2);
+}
+#toc p {
+  margin-bottom: var(--toc-font-size);
+}
+
+#answer h3 {
+  color: var(--white);
+  text-shadow: var(--text-shadow-default);
+  box-shadow: 0.025rem 0.05rem var(--black-50);
+
+  border-radius: 0.5rem 0.2rem 1rem 0.2rem;
+  background: linear-gradient(to bottom, var(--orange) 10%, var(--yellow) 110%);
+}
+#answer h3 span {
+  display: inline-flex;
+  width: 1.5rem;
+  height: 1.5rem;
+  justify-content: center;
+}
+#answer hr {
+  height: 0;
+  border: none;
+  border-bottom: 0.05rem dashed var(--black-50);
+}
+
+#answer h3,
+#answer hr,
+#answer p {
+  margin-bottom: 1rem;
+}
+#answer p {
+  font-family: system-ui;
+  font-weight: normal;
+  font-size: 0.5rem;
 }

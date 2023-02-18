@@ -41,6 +41,11 @@ function showPage(id) {
   page.classList.remove('display-none')
 }
 
+function acceptToc() {
+  document.getElementById('toc').classList.add('display-none')
+  document.getElementById('answer').classList.remove('display-none')
+}
+
 function replayIntro() {
   const island = document.querySelector('.island')
   const splash = document.querySelector('.water-splash')
@@ -55,6 +60,19 @@ function replayIntro() {
 window.addEventListener(
   'load',
   () => {
+    const tocObserver = new IntersectionObserver(
+      (some) => {
+        const it = document.getElementById('accept-btn')
+        if (some[0].isIntersecting) {
+          it.removeAttribute('disabled')
+        } else {
+          it.setAttribute('disabled', 'disabled')
+        }
+      },
+      { threshold: 1.0 }
+    )
+    tocObserver.observe(document.getElementById('toc-read'))
+
     let route = window.location.hash.slice(1)
     callRoute(route).then(
       (_resolve) => {
