@@ -15,6 +15,13 @@ const ROUTES = [
       document.getElementById('back-button').classList.add('hidden')
       window.location.hash = 'always'
       showPage('always')
+      document
+        .getElementById('site-title')
+        .scrollIntoView({
+          behavior: 'smooth',
+          block: 'start',
+          inline: 'nearest',
+        })
       document.getElementById('back-button').classList.remove('hidden')
     },
   },
