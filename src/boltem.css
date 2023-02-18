@@ -460,8 +460,7 @@ footer {
   position: absolute;
   aspect-ratio: 2.5 / 3.5;
   height: var(--card-height);
-  background: url('https://cards.scryfall.io/large/front/5/2/52c79d57-a8eb-427d-86ac-b203c0bb7cda.jpg')
-    center;
+  background: url('j22-108-mountain.jpg') center;
   background-size: auto 100%;
   border-radius: calc(var(--card-height) * var(--card-border-width));
   transform: perspective(10rem) translate3d(0, 0, -1rem) rotateZ(-2deg);
