@@ -354,6 +354,7 @@ article {
 }
 #toc-content {
   overflow-y: scroll;
+  overflow-x: hidden;
   max-height: 12rem;
   padding: 0.5rem;
   margin: 1rem;
@@ -370,6 +371,54 @@ article {
 }
 #toc p {
   margin-bottom: var(--toc-font-size);
+}
+#toc p:nth-child(5) {
+  rotate: z 3deg;
+  transform: skewX(3deg);
+}
+#toc p:nth-child(6) {
+  rotate: z -15deg;
+  transform: skewY(15deg);
+}
+#toc p:nth-child(7) {
+  translate: 1rem 0;
+  rotate: z -3deg;
+}
+#toc p:nth-child(8) {
+  transform: perspective(8rem) rotateY(-15deg) rotateX(5deg) translateX(-1rem);
+}
+#toc p:nth-child(9) {
+  transform: perspective(8rem) rotateY(10deg) rotateX(25deg) translateX(1rem);
+}
+#toc p:nth-child(10) {
+  rotate: z -3deg;
+}
+#toc p:nth-child(11) {
+  transform: perspective(8rem) rotateY(-3deg);
+}
+#toc p:nth-child(12) {
+  rotate: z 2deg;
+  scale: 1.2 1;
+}
+#toc p:nth-child(13) {
+  scale: 1.3;
+}
+#toc p:nth-child(14) {
+  scale: 1.3;
+}
+#this-is-fine {
+  position: relative;
+  z-index: 0;
+}
+#this-is-fine:after {
+  content: '☠';
+  position: absolute;
+  opacity: 0.4;
+  top: 0;
+  left: 50%;
+  translate: -50% -20%;
+  font-size: 8rem;
+  z-index: -1;
 }
 
 #answer h3 {
