@@ -322,6 +322,57 @@ article {
     transform: translateX(0) rotateZ(0);
   }
 }
+.leave .clippy-eyes:before,
+.leave .clippy-eyes:after {
+  background: radial-gradient(var(--red-light), red) !important;
+  outline-color: var(--red-dark) !important;
+  box-shadow: 0 0 0.5rem 0.1rem red;
+}
+
+.leave {
+  animation: angry, leave-to-right !important;
+  animation-duration: 750ms, 500ms !important;
+  animation-delay: 0s, 750ms !important;
+  animation-timing-function: linear, ease !important;
+  animation-fill-mode: forwards, forwards !important;
+}
+@keyframes angry {
+  0%,
+  10%,
+  20%,
+  30%,
+  40%,
+  50%,
+  60%,
+  70%,
+  80%,
+  90%,
+  100% {
+    transform: translateX(0rem);
+  }
+  5%,
+  15%,
+  25%,
+  35%,
+  45%,
+  55%,
+  65%,
+  75%,
+  85%,
+  95% {
+    transform: translateX(0.1rem);
+  }
+}
+@keyframes leave-to-right {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(5rem);
+    opacity: 0;
+  }
+}
 
 #clippy:before {
   content: '';
@@ -401,6 +452,7 @@ article {
 }
 
 #clippy-text {
+  --clippy-text-bg: var(--yellow-note);
   position: absolute;
   top: 0;
   right: 0;
@@ -411,11 +463,11 @@ article {
   font-size: 0.5rem;
   line-height: 0.6rem;
   text-shadow: none;
-  background: var(--yellow-note);
+  background: var(--clippy-text-bg);
   border: 1px solid black;
   border-radius: 0.4rem;
   padding: 0.25rem;
-  width: 8rem;
+  width: 7rem;
   text-align: left;
   opacity: 0;
   animation: fade-in 500ms ease-out forwards 7s;
@@ -426,17 +478,22 @@ article {
   right: 3rem;
   scale: 0.75 1;
   bottom: -0.7rem;
-  border: 0.4rem solid var(--yellow-note);
+  border: 0.4rem solid var(--clippy-text-bg);
   border-bottom-color: transparent;
   border-left-color: transparent;
   filter: drop-shadow(1px 2px 0 black);
+}
+.ranting #clippy-text {
+  text-align: center;
+  padding: 1rem 0;
+  font-size: 1rem;
+  --clippy-text-bg: var(--red-light);
 }
 #clippy-buttons {
   padding-top: 0.5rem;
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: 0.2rem;
 }
 #clippy-buttons button {
   display: inline-block;
@@ -450,7 +507,47 @@ article {
   border-radius: 0.125rem;
 }
 
-#clippy-buttons button:hover,
+#clippy-buttons button:hover {
+  border-style: outset !important;
+  box-shadow: inset -1px -1px var(--black-50), inset 1px 1px var(--white);
+  transform: none !important;
+  transition: none !important;
+}
 #clippy-buttons button:active {
-  border-color: var(--grey-dark);
+  border-style: inset !important;
+  box-shadow: inset -1px -1px var(--white), inset 1px 1px var(--black-50);
+  transform: translate(1px, 1px) !important;
+  transition: none !important;
+}
+#clippy-buttons.links {
+  flex-direction: column;
+  align-items: start;
+}
+#clippy-buttons.links button {
+  border-color: transparent !important;
+  padding-left: 0.8rem;
+  position: relative;
+  text-align: left;
+}
+#clippy-buttons.links button:before {
+  content: '';
+  position: absolute;
+  top: 0.3rem;
+  left: 0.2rem;
+  width: 0.25rem;
+  height: 0.25rem;
+  border-radius: 9rem;
+  outline: 1px solid var(--grey-dark);
+  background: radial-gradient(60% 60%, var(--blue-light), var(--blue-dark));
+}
+#clippy-buttons.links button:after {
+  content: '';
+  position: absolute;
+  top: 0.325rem;
+  left: 0.225rem;
+  width: 0.1rem;
+  height: 0.1rem;
+  border-radius: 9rem;
+  background: var(--white);
+  opacity: 0.9;
 }

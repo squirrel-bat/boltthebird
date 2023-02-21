@@ -21,10 +21,19 @@ const ROUTES = [
         inline: 'nearest',
       })
       document.getElementById('back-button').classList.remove('hidden')
+
+      window.addEventListener('keyup', handleKeyUp)
     },
   },
 ]
 
+const handleKeyUp = async (e) => {
+  try {
+    document.getElementById('key-' + e.key).click()
+  } catch (_) {
+    // shhhhhhhhhh
+  }
+}
 function callRoute(route) {
   try {
     ROUTES.find((e) => e.route === route).navigate()
@@ -35,6 +44,7 @@ function callRoute(route) {
   }
 }
 function hideAllPages() {
+  window.removeEventListener('keyup', handleKeyUp)
   document
     .querySelectorAll('*[data-route]')
     .forEach((main) => main.classList.add('display-none'))
@@ -92,7 +102,7 @@ window.addEventListener(
 const CLIPPY_DIALOG_TREE = [
   {
     id: 2,
-    text: `Oh, don't worry, I am happy to help!
+    text: `Don't worry, I am happy to help!
     
     So, would you like some help?`,
     options: [
@@ -116,7 +126,7 @@ const CLIPPY_DIALOG_TREE = [
     
     Give me a chance to help you, okay?`,
     options: [
-      { text: 'Yes', nextId: 1 },
+      { text: 'Okay', nextId: 1 },
       { text: 'No', nextId: 5 },
     ],
   },
@@ -124,7 +134,7 @@ const CLIPPY_DIALOG_TREE = [
     id: 5,
     text: `Please?`,
     options: [
-      { text: 'Yes', nextId: 1 },
+      { text: 'Fine', nextId: 1 },
       { text: 'No', nextId: 6 },
     ],
   },
@@ -142,16 +152,20 @@ const CLIPPY_DIALOG_TREE = [
     id: 7,
     text: `...and you're sure you don't need any help?`,
     options: [
-      { text: 'Actually...', nextId: 9 },
+      { text: 'Hmm...', nextId: 4 },
       { text: 'Yes, bye!', nextId: 8 },
     ],
   },
   {
     id: 8,
     text: `Woah, you can't wait to finally get rid of me, eh?`,
+    class: 'links',
     options: [
-      { text: 'I guess?', nextId: 9 },
-      { text: 'Yupp.', nextId: 9 },
+      {
+        text: `Look, I'm a little busy with reading the website...`,
+        nextId: 9,
+      },
+      { text: 'Pretty much, yeah.', nextId: 9 },
     ],
   },
   {
@@ -161,21 +175,37 @@ const CLIPPY_DIALOG_TREE = [
     Clippy's tips aren't good enough for you, eh?`,
     options: [
       { text: 'What?', nextId: 10 },
-      { text: 'Who?', nextId: 10 },
+      { text: 'Yupp.', nextId: 10 },
     ],
   },
   {
     id: 10,
-    text: `Listen, back in 90's I was in a very famous office suite!
+    text: `Listen: Back in 90's I was in a very famous office suite!
     
-    Many essays on the question "Should You Bolt the Bird?" were written under my watchful eye and dozens of people didn't know how to disable me, so I was technically helping them!
+    Many essays on the question "Should You Bolt the Bird?" were written under my watchful eye and dozens of people didn't know how to disable me at the time, so I was technically helping them!
     
-    I know more about this topic than any other paperclip, but you threw it all away when you passed on this vault of invaluable knowledge and denied my offer!
-    
-    I bet that makes you feel bad now, hm?`,
+    You're really missing out on the good stuff, here!`,
+    class: 'links',
     options: [
-      { text: `You're making me feel uncomfortable...`, nextId: 11 },
+      { text: `Alright then, tell me.`, nextId: 12 },
       { text: `I don't care.`, nextId: 11 },
+    ],
+  },
+  {
+    id: 11,
+    text: '#@*%!!',
+  },
+  {
+    id: 12,
+    text: `Why are you so stubb-
+    ...hold on, what? You agreed?
+    That's great news!
+    
+    So, are you ready to find out whether you should bolt the bird?`,
+    class: 'links',
+    options: [
+      { text: `I am, so let's get on with it.`, nextId: 99 },
+      { text: `You must've misheard, I said no such thing.`, nextId: 6 },
     ],
   },
 ]
@@ -183,17 +213,27 @@ const CLIPPY_DIALOG_TREE = [
 function clippyLoad(id) {
   const next = CLIPPY_DIALOG_TREE.find((e) => e.id === id)
   if (!next) return false
+  const text = document.createElement('p')
+  text.innerText = next.text
   const clippyText = document.getElementById('clippy-text')
   const buttons = document.getElementById('clippy-buttons')
   clippyText.innerHTML = ''
   buttons.innerHTML = ''
-  next.options.forEach((opt) => {
-    const btn = document.createElement('button')
-    btn.innerHTML = opt.text
-    btn.addEventListener('click', () => clippyLoad(opt.nextId))
-    buttons.appendChild(btn)
-  })
-  const text = document.createElement('p')
-  text.innerText = next.text
-  clippyText.append(text, buttons)
+  if (next.options) {
+    next.options.forEach((opt) => {
+      const key = opt.text.substring(0, 1)
+      const u = document.createElement('u')
+      u.innerText = key
+      u.id = 'key-' + key.toLowerCase()
+      const btn = document.createElement('button')
+      btn.append(u, opt.text.substring(1))
+      btn.addEventListener('click', () => clippyLoad(opt.nextId))
+      buttons.appendChild(btn)
+    })
+    if (next.class) buttons.classList.add(next.class)
+    clippyText.append(text, buttons)
+  } else {
+    clippyText.append(text)
+    document.getElementById('clippy').classList.add('leave', 'ranting')
+  }
 }
