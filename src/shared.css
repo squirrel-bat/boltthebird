@@ -384,7 +384,7 @@ button:active {
   gap: 0.4rem;
   font-size: 1.5rem;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: start;
   align-items: center;
   padding: 0.5rem;
@@ -403,6 +403,16 @@ button:active {
 }
 .copyright a:hover {
   text-decoration: underline;
+}
+.fan-content-policy {
+  font-family: system-ui;
+  font-size: 0.375rem;
+  font-weight: normal;
+  text-shadow: none;
+  color: var(--black-50);
+}
+.fan-content-policy a {
+  filter: drop-shadow(0.03rem 0.03rem var(--black-50));
 }
 .row {
   align-self: stretch;

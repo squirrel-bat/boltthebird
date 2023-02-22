@@ -14,7 +14,6 @@ body {
   flex-direction: column;
 }
 .copyright {
-  /* align-self to end of main flex axis. I have no regrets. */
   margin-top: auto;
 }
 nav {
