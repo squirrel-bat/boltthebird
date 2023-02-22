@@ -176,8 +176,8 @@ main {
 article {
   text-align: left;
   margin: 0 auto 2rem;
-  padding: 0.5rem 1rem;
-  max-width: 22rem;
+  padding: 0.5rem 1rem 1rem;
+  max-width: 23rem;
   border-radius: 0.25rem;
   background: var(--white-50);
   box-shadow: 0.075rem 0.1rem 0 var(--black-50);
@@ -185,12 +185,11 @@ article {
 
 #toc {
   --toc-font-size: 0.5rem;
-  padding-bottom: 1rem;
 }
 #toc-content {
   overflow-y: scroll;
   overflow-x: hidden;
-  max-height: 12rem;
+  max-height: 11rem;
   padding: 0.5rem;
   margin: 1rem;
   border: 2px inset var(--grey-light);
@@ -262,7 +261,11 @@ article {
   box-shadow: 0.025rem 0.05rem var(--black-50);
 
   border-radius: 0.5rem 0.2rem 1rem 0.2rem;
-  background: linear-gradient(to bottom, var(--orange) 10%, var(--yellow) 110%);
+  background: linear-gradient(
+    to bottom,
+    var(--blue-dark) 10%,
+    var(--blue) 110%
+  );
 }
 #answer h3 span {
   display: inline-flex;
@@ -293,7 +296,7 @@ article {
   position: fixed;
   right: 1rem;
   bottom: 1rem;
-  translate: -50% 0;
+  translate: -1rem 0;
   height: 3.2rem;
   width: 1.85rem;
   border-bottom-left-radius: 1rem;
@@ -305,22 +308,7 @@ article {
   transform: translateX(5rem);
   animation: enter-from-right 5s ease-out forwards 2s;
 }
-@keyframes enter-from-right {
-  0% {
-    transform: translateX(5rem);
-  }
-  10%,
-  30% {
-    transform: translateX(5rem) rotateZ(-30deg);
-  }
-  35%,
-  70% {
-    transform: translateX(5rem) rotateZ(5deg);
-  }
-  100% {
-    transform: translateX(0) rotateZ(0);
-  }
-}
+
 .leave .clippy-eyes:before,
 .leave .clippy-eyes:after {
   background: radial-gradient(var(--red-light), red) !important;
@@ -334,43 +322,6 @@ article {
   animation-delay: 0s, 750ms !important;
   animation-timing-function: linear, ease !important;
   animation-fill-mode: forwards, forwards !important;
-}
-@keyframes angry {
-  0%,
-  10%,
-  20%,
-  30%,
-  40%,
-  50%,
-  60%,
-  70%,
-  80%,
-  90%,
-  100% {
-    transform: translateX(0rem);
-  }
-  5%,
-  15%,
-  25%,
-  35%,
-  45%,
-  55%,
-  65%,
-  75%,
-  85%,
-  95% {
-    transform: translateX(0.1rem);
-  }
-}
-@keyframes leave-to-right {
-  0% {
-    transform: translateX(0);
-    opacity: 1;
-  }
-  100% {
-    transform: translateX(5rem);
-    opacity: 0;
-  }
 }
 
 #clippy:before {
@@ -436,18 +387,6 @@ article {
 .clippy-eyes:after {
   right: 0;
   animation: rotate-left 3s linear infinite 1s;
-}
-
-@keyframes rotate-left {
-  0% {
-    rotate: z 0deg;
-  }
-  50% {
-    rotate: z 180deg;
-  }
-  100% {
-    rotate: z 360deg;
-  }
 }
 
 #clippy-text {
@@ -549,4 +488,69 @@ article {
   border-radius: 9rem;
   background: var(--white);
   opacity: 0.9;
+}
+
+@keyframes enter-from-right {
+  0% {
+    transform: translateX(5rem);
+  }
+  10%,
+  30% {
+    transform: translateX(5rem) rotateZ(-30deg);
+  }
+  35%,
+  70% {
+    transform: translateX(5rem) rotateZ(5deg);
+  }
+  100% {
+    transform: translateX(0) rotateZ(0);
+  }
+}
+@keyframes angry {
+  0%,
+  10%,
+  20%,
+  30%,
+  40%,
+  50%,
+  60%,
+  70%,
+  80%,
+  90%,
+  100% {
+    transform: translateX(0rem);
+  }
+  5%,
+  15%,
+  25%,
+  35%,
+  45%,
+  55%,
+  65%,
+  75%,
+  85%,
+  95% {
+    transform: translateX(0.1rem);
+  }
+}
+@keyframes leave-to-right {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(5rem);
+    opacity: 0;
+  }
+}
+@keyframes rotate-left {
+  0% {
+    rotate: z 0deg;
+  }
+  50% {
+    rotate: z 180deg;
+  }
+  100% {
+    rotate: z 360deg;
+  }
 }

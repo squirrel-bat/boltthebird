@@ -230,6 +230,7 @@ function clippyLoad(id) {
       btn.addEventListener('click', () => clippyLoad(opt.nextId))
       buttons.appendChild(btn)
     })
+    buttons.classList.value = ''
     if (next.class) buttons.classList.add(next.class)
     clippyText.append(text, buttons)
   } else {
