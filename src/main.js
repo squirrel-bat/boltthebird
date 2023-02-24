@@ -15,13 +15,13 @@ const ROUTES = [
       document.getElementById('back-button').classList.add('hidden')
       window.location.hash = 'always'
       showPage('always')
+      clippyLoad(1)
+      document.getElementById('back-button').classList.remove('hidden')
       document.getElementById('site-title').scrollIntoView({
         behavior: 'smooth',
         block: 'start',
         inline: 'nearest',
       })
-      document.getElementById('back-button').classList.remove('hidden')
-
       window.addEventListener('keyup', handleKeyUp)
     },
   },
@@ -101,12 +101,22 @@ window.addEventListener(
 
 const CLIPPY_DIALOG_TREE = [
   {
+    id: 1,
+    text: `It looks like you're trying to figure out whether you should bolt the bird.
+    
+    Would you like help?`,
+    options: [
+      { text: 'Yes', nextId: 33 },
+      { text: 'No', nextId: 2 },
+    ],
+  },
+  {
     id: 2,
     text: `Don't worry, I am happy to help!
     
     So, would you like some help?`,
     options: [
-      { text: 'Yes', nextId: 1 },
+      { text: 'Yes', nextId: 33 },
       { text: 'No', nextId: 3 },
     ],
   },
@@ -116,7 +126,7 @@ const CLIPPY_DIALOG_TREE = [
     
     Want to give it a try?`,
     options: [
-      { text: 'Yes', nextId: 1 },
+      { text: 'Yes', nextId: 33 },
       { text: 'No', nextId: 4 },
     ],
   },
@@ -126,7 +136,7 @@ const CLIPPY_DIALOG_TREE = [
     
     Give me a chance to help you, okay?`,
     options: [
-      { text: 'Okay', nextId: 1 },
+      { text: 'Okay', nextId: 33 },
       { text: 'No', nextId: 5 },
     ],
   },
@@ -134,7 +144,7 @@ const CLIPPY_DIALOG_TREE = [
     id: 5,
     text: `Please?`,
     options: [
-      { text: 'Fine', nextId: 1 },
+      { text: 'Fine', nextId: 33 },
       { text: 'No', nextId: 6 },
     ],
   },
@@ -163,7 +173,7 @@ const CLIPPY_DIALOG_TREE = [
     options: [
       {
         text: `Look, I'm a little busy with reading the website...`,
-        nextId: 9,
+        nextId: 10,
       },
       { text: 'Pretty much, yeah.', nextId: 9 },
     ],
