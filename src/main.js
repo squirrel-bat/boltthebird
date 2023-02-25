@@ -223,12 +223,14 @@ const CLIPPY_DIALOG_TREE = [
 function clippyLoad(id) {
   const next = CLIPPY_DIALOG_TREE.find((e) => e.id === id)
   if (!next) return false
+  const clippy = document.getElementById('clippy')
   const text = document.createElement('p')
   text.innerText = next.text
   const clippyText = document.getElementById('clippy-text')
   const buttons = document.getElementById('clippy-buttons')
   clippyText.innerHTML = ''
   buttons.innerHTML = ''
+  clippy.removeChild(clippyText)
   if (next.options) {
     next.options.forEach((opt) => {
       const key = opt.text.substring(0, 1)
@@ -247,4 +249,6 @@ function clippyLoad(id) {
     clippyText.append(text)
     document.getElementById('clippy').classList.add('leave', 'ranting')
   }
+  if (id !== 1) clippyText.removeAttribute('style')
+  clippy.append(clippyText)
 }

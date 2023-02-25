@@ -297,8 +297,8 @@ article {
   right: 1rem;
   bottom: 1rem;
   translate: -1rem 0;
-  height: 3.2rem;
-  width: 1.85rem;
+  height: 3rem;
+  width: 1.8rem;
   border-bottom-left-radius: 1rem;
   border-bottom-right-radius: 1rem;
   border: var(--clippy-border);
@@ -390,11 +390,11 @@ article {
 }
 
 #clippy-text {
+  --clippy-text-animation: pop-in 2s ease-in-out forwards;
   --clippy-text-bg: var(--yellow-note);
   position: absolute;
-  top: 0;
-  right: 0;
-  translate: 1rem calc((100% + 4rem) * -1);
+  bottom: 7rem;
+  right: -1rem;
   z-index: 9999;
   font-family: system-ui;
   font-weight: normal;
@@ -408,7 +408,8 @@ article {
   width: 7rem;
   text-align: left;
   opacity: 0;
-  animation: fade-in 500ms ease-out forwards 7s;
+  transform-origin: 50% 120%;
+  animation: var(--clippy-text-animation);
 }
 #clippy-text:after {
   content: '';

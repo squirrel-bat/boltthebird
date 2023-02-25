@@ -114,6 +114,26 @@
     opacity: 0;
   }
 }
+@keyframes pop-in {
+  0%,
+  3% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  7% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  10% {
+    opacity: 1;
+    transform: scale(0.95);
+  }
+  12.5%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
 @keyframes island {
   0% {
     transform: translate(-50%, var(--start-pos)) skewX(-20deg);
@@ -412,7 +432,7 @@ button:active {
   color: var(--black-50);
 }
 .fan-content-policy a {
-  filter: drop-shadow(0.03rem 0.03rem var(--black-50));
+  filter: drop-shadow(0.05rem 0.05rem var(--black-50));
 }
 .row {
   align-self: stretch;
