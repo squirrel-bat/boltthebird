@@ -22,7 +22,10 @@ const ROUTES = [
         block: 'start',
         inline: 'nearest',
       })
-      window.addEventListener('keyup', handleKeyUp)
+      window.setTimeout(
+        () => window.addEventListener('keyup', handleKeyUp),
+        7000
+      )
     },
   },
 ]
@@ -99,6 +102,49 @@ window.addEventListener(
   { once: true }
 )
 
+function stringToNodeList(str) {
+  try {
+    const template = document.createElement('template')
+    template.innerHTML = str.replace(/(\n)/g, '<br />')
+    return template.content.childNodes
+  } catch (e) {
+    return 'Hm, I seem to have forgotten what I wanted to say.'
+  }
+}
+
+function clippyLoad(id) {
+  const next = CLIPPY_DIALOG_TREE.find((e) => e.id === id)
+  if (!next) return false
+  const clippy = document.getElementById('clippy')
+  const text = document.createElement('p')
+  text.append(...stringToNodeList(next.text))
+  const clippyText = document.getElementById('clippy-text')
+  const buttons = document.getElementById('clippy-buttons')
+  clippyText.innerHTML = ''
+  buttons.innerHTML = ''
+  clippy.removeChild(clippyText)
+  if (next.options) {
+    next.options.forEach((opt) => {
+      const key = opt.text.substring(0, 1)
+      const u = document.createElement('u')
+      u.innerText = key
+      u.id = 'key-' + key.toLowerCase()
+      const btn = document.createElement('button')
+      btn.append(u, opt.text.substring(1))
+      btn.addEventListener('click', () => clippyLoad(opt.nextId))
+      buttons.appendChild(btn)
+    })
+    buttons.classList.value = ''
+    if (next.class) buttons.classList.add(next.class)
+    clippyText.append(text, buttons)
+  } else {
+    clippyText.append(text)
+    clippy.classList.add(next.class)
+  }
+  if (id !== 1) clippyText.removeAttribute('style')
+  clippy.append(clippyText)
+}
+
 const CLIPPY_DIALOG_TREE = [
   {
     id: 1,
@@ -106,7 +152,7 @@ const CLIPPY_DIALOG_TREE = [
     
     Would you like help?`,
     options: [
-      { text: 'Yes', nextId: 33 },
+      { text: 'Yes', nextId: 20 },
       { text: 'No', nextId: 2 },
     ],
   },
@@ -116,7 +162,7 @@ const CLIPPY_DIALOG_TREE = [
     
     So, would you like some help?`,
     options: [
-      { text: 'Yes', nextId: 33 },
+      { text: 'Yes', nextId: 20 },
       { text: 'No', nextId: 3 },
     ],
   },
@@ -126,7 +172,7 @@ const CLIPPY_DIALOG_TREE = [
     
     Want to give it a try?`,
     options: [
-      { text: 'Yes', nextId: 33 },
+      { text: 'Yes', nextId: 20 },
       { text: 'No', nextId: 4 },
     ],
   },
@@ -136,7 +182,7 @@ const CLIPPY_DIALOG_TREE = [
     
     Give me a chance to help you, okay?`,
     options: [
-      { text: 'Okay', nextId: 33 },
+      { text: 'Okay', nextId: 20 },
       { text: 'No', nextId: 5 },
     ],
   },
@@ -144,7 +190,7 @@ const CLIPPY_DIALOG_TREE = [
     id: 5,
     text: `Please?`,
     options: [
-      { text: 'Fine', nextId: 33 },
+      { text: 'Fine', nextId: 20 },
       { text: 'No', nextId: 6 },
     ],
   },
@@ -204,6 +250,7 @@ const CLIPPY_DIALOG_TREE = [
   {
     id: 11,
     text: '#@*%!!',
+    class: 'ranting',
   },
   {
     id: 12,
@@ -218,37 +265,91 @@ const CLIPPY_DIALOG_TREE = [
       { text: `You must've misheard, I said no such thing.`, nextId: 6 },
     ],
   },
-]
+  {
+    id: 20,
+    text: `Just what I wanted to hear!
 
-function clippyLoad(id) {
-  const next = CLIPPY_DIALOG_TREE.find((e) => e.id === id)
-  if (!next) return false
-  const clippy = document.getElementById('clippy')
-  const text = document.createElement('p')
-  text.innerText = next.text
-  const clippyText = document.getElementById('clippy-text')
-  const buttons = document.getElementById('clippy-buttons')
-  clippyText.innerHTML = ''
-  buttons.innerHTML = ''
-  clippy.removeChild(clippyText)
-  if (next.options) {
-    next.options.forEach((opt) => {
-      const key = opt.text.substring(0, 1)
-      const u = document.createElement('u')
-      u.innerText = key
-      u.id = 'key-' + key.toLowerCase()
-      const btn = document.createElement('button')
-      btn.append(u, opt.text.substring(1))
-      btn.addEventListener('click', () => clippyLoad(opt.nextId))
-      buttons.appendChild(btn)
-    })
-    buttons.classList.value = ''
-    if (next.class) buttons.classList.add(next.class)
-    clippyText.append(text, buttons)
-  } else {
-    clippyText.append(text)
-    document.getElementById('clippy').classList.add('leave', 'ranting')
-  }
-  if (id !== 1) clippyText.removeAttribute('style')
-  clippy.append(clippyText)
-}
+    Now, let's start off with a few questions about the board state:
+    
+    Is there a <a href='https://scryfall.com/card/cn2/176/birds-of-paradise' target='_blank'>Birds of Paradise</a> or any other <a href='https://scryfall.com/search?q=oracletag%3Amana-dork+cmc%3D1&unique=cards' target='_blank'>mana dork</a> on the battlefield?`,
+    options: [
+      { text: 'Yes', nextId: 21 },
+      { text: 'No', nextId: 40 },
+    ],
+  },
+  {
+    id: 21,
+    text: `I knew it!
+    
+    Who controls it?`,
+    class: 'links',
+    options: [
+      { text: 'My Opponent(s).', nextId: 22 },
+      { text: 'I do.', nextId: 50 },
+    ],
+  },
+  {
+    id: 22,
+    text: `Well, that's a problem!
+    
+    Do you happen to have a <a href='https://scryfall.com/card/2x2/117/lightning-bolt' target='_blank'>Lightning Bolt</a> or any other removal spell that can target an opponent's creature in your hand?`,
+    options: [
+      { text: 'Yes', nextId: 23 },
+      { text: 'No', nextId: 30 },
+    ],
+  },
+  {
+    id: 30,
+    text: '...',
+    options: [{ text: 'What?', nextId: 31 }],
+  },
+  {
+    id: 31,
+    text: `...maybe...
+    
+    ...if you believe in the heart of the cards, you might draw something useful...?`,
+    class: 'links',
+    options: [
+      { text: `I don't understand...?`, nextId: 32 },
+      { text: 'Are you kidding me!?', nextId: 32 },
+    ],
+  },
+  {
+    id: 32,
+    text: `Look, it's basically over if your next draw isn't a creature removal spell and I can't really help you with that, so...`,
+    class: 'links',
+    options: [
+      { text: 'I see...', nextId: 33 },
+      {
+        text: `No, I can still recover from this and win the game! My deck is well constructed, playtested and refined! The odds of drawing that spell are so high, it's pretty much guaranteed, Clippy! We got this!`,
+        nextId: 33,
+      },
+    ],
+  },
+  {
+    id: 33,
+    text: '...good luck, planeswalker.',
+    class: 'leaving',
+  },
+  {
+    id: 40,
+    text: 'Have you double checked?',
+    class: 'links',
+    options: [
+      { text: 'Yes', nextId: 41 },
+      { text: `Wait, there's one over there!`, nextId: 21 },
+    ],
+  },
+  {
+    id: 41,
+    text: `Okay, that's good news!
+    
+    Just stay vigilant and you'll be fine.`,
+    options: [{ text: 'Okay', nextId: 42 }],
+  },
+  {
+    id: 42,
+    text: 'Until next time!',
+    class: 'leaving',
+  },
+]

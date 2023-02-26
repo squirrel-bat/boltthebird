@@ -228,7 +228,7 @@ article {
   rotate: z -3deg;
 }
 #toc p:nth-child(11) {
-  transform: perspective(8rem) rotateY(-3deg);
+  transform: perspective(8rem) rotateY(-3deg) rotateX(8deg) scaleX(1.1);
 }
 #toc p:nth-child(12) {
   rotate: z 2deg;
@@ -294,9 +294,8 @@ article {
   --clippy-border: 0.2rem solid var(--grey);
   z-index: 9999;
   position: fixed;
-  right: 1rem;
+  right: 2rem;
   bottom: 1rem;
-  translate: -1rem 0;
   height: 3rem;
   width: 1.8rem;
   border-bottom-left-radius: 1rem;
@@ -305,23 +304,44 @@ article {
   border-top: none;
   filter: drop-shadow(0.075rem 0.1rem 0 var(--black-50));
   transform-origin: bottom center;
-  transform: translateX(5rem);
-  animation: enter-from-right 5s ease-out forwards 2s;
+  animation: put-right, enter-from-right;
+  animation-duration: 2s, 5s;
+  animation-delay: 0s, 2s;
+  animation-timing-function: linear, ease-out;
+  animation-fill-mode: forwards, forwards;
 }
 
-.leave .clippy-eyes:before,
-.leave .clippy-eyes:after {
-  background: radial-gradient(var(--red-light), red) !important;
-  outline-color: var(--red-dark) !important;
-  box-shadow: 0 0 0.5rem 0.1rem red;
-}
-
-.leave {
+.ranting {
   animation: angry, leave-to-right !important;
   animation-duration: 750ms, 500ms !important;
   animation-delay: 0s, 750ms !important;
   animation-timing-function: linear, ease !important;
   animation-fill-mode: forwards, forwards !important;
+}
+.ranting .clippy-eyes:before,
+.ranting .clippy-eyes:after {
+  background: radial-gradient(var(--red-light), red) !important;
+  outline-color: var(--red-dark) !important;
+  box-shadow: 0 0 0.5rem 0.1rem red;
+}
+
+.ranting #clippy-text {
+  text-align: center;
+  padding: 1rem 0;
+  font-size: 1rem;
+  --clippy-text-bg: var(--red-light);
+}
+
+.leaving {
+  animation: leave-to-right !important;
+  animation-duration: 2s !important;
+  animation-delay: 5s !important;
+  animation-timing-function: ease !important;
+  animation-fill-mode: forwards !important;
+}
+.leaving #clippy-text {
+  text-align: center;
+  padding: 1rem 0;
 }
 
 #clippy:before {
@@ -422,12 +442,6 @@ article {
   border-left-color: transparent;
   filter: drop-shadow(1px 2px 0 black);
 }
-.ranting #clippy-text {
-  text-align: center;
-  padding: 1rem 0;
-  font-size: 1rem;
-  --clippy-text-bg: var(--red-light);
-}
 #clippy-buttons {
   padding-top: 0.5rem;
   display: flex;
@@ -491,6 +505,12 @@ article {
   opacity: 0.9;
 }
 
+@keyframes put-right {
+  0%,
+  100% {
+    transform: translateX(5rem);
+  }
+}
 @keyframes enter-from-right {
   0% {
     transform: translateX(5rem);
