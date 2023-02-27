@@ -431,7 +431,7 @@ article {
   transform-origin: 50% 120%;
   animation: var(--clippy-text-animation);
 }
-#clippy-text:has(.wide) {
+#clippy-text.wide {
   width: 14rem !important;
 }
 #clippy-text:after {

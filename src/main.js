@@ -123,6 +123,7 @@ function clippyLoad(id) {
   clippyText.innerHTML = ''
   buttons.innerHTML = ''
   clippy.removeChild(clippyText)
+  if (next.mode) clippyText.classList.add(next.mode)
   if (next.options) {
     next.options.forEach((opt) => {
       const key = opt.text.substring(0, 1)
@@ -236,7 +237,7 @@ const CLIPPY_DIALOG_TREE = [
   },
   {
     id: 10,
-    text: `Listen: Back in 90's I was in a very famous office suite!
+    text: `Listen: Back in '90s I was in a very famous office suite!
     
     Many essays on the question "Should You Bolt the Bird?" were written under my watchful eye and dozens of people didn't know how to disable me at the time, so I was technically helping them!
     
@@ -397,7 +398,8 @@ const CLIPPY_DIALOG_TREE = [
     ...it must make sense in a way I just don't see...
     
     ...think, Clippy, <strong>think!</strong></i>`,
-    class: 'links wide',
+    class: 'links',
+    mode: 'wide',
     options: [
       { text: 'Clippy? You alright there, mate?', nextId: 52 },
       {
@@ -473,7 +475,8 @@ const CLIPPY_DIALOG_TREE = [
     
     Everyone can just look up things on the internet, okay?
     But I <i>know</i> things!`,
-    class: 'links wide',
+    class: 'links',
+    mode: 'wide',
     options: [
       { text: `Alright, I will bolt the bird!`, nextId: 64 },
       {
