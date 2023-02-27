@@ -123,6 +123,7 @@ function clippyLoad(id) {
   clippyText.innerHTML = ''
   buttons.innerHTML = ''
   clippy.removeChild(clippyText)
+  clippyText.classList.value = ''
   if (next.mode) clippyText.classList.add(next.mode)
   if (next.options) {
     next.options.forEach((opt) => {
