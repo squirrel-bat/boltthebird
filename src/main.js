@@ -303,7 +303,7 @@ const CLIPPY_DIALOG_TREE = [
     text: `Good, good!
     Now, here's your answer:
     
-    You should bold the bird.`,
+    You should bolt the bird.`,
     class: 'links',
     options: [
       { text: 'Will do, thank you!', nextId: 42 },
