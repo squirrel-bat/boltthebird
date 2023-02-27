@@ -285,7 +285,7 @@ const CLIPPY_DIALOG_TREE = [
     Who controls it?`,
     class: 'links',
     options: [
-      { text: 'My Opponent.', nextId: 22 },
+      { text: 'My opponent.', nextId: 22 },
       { text: 'I do.', nextId: 50 },
     ],
   },
