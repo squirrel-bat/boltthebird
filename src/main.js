@@ -135,11 +135,11 @@ function clippyLoad(id) {
       buttons.appendChild(btn)
     })
     buttons.classList.value = ''
-    if (next.class) buttons.classList.add(next.class)
+    if (next.class) buttons.classList.add(...next.class.split(' '))
     clippyText.append(text, buttons)
   } else {
     clippyText.append(text)
-    clippy.classList.add(next.class)
+    clippy.classList.add(...next.class.split(' '))
   }
   if (id !== 1) clippyText.removeAttribute('style')
   clippy.append(clippyText)
@@ -255,13 +255,13 @@ const CLIPPY_DIALOG_TREE = [
   {
     id: 12,
     text: `Why are you so stubb-
-    ...hold on, what? You agreed?
-    That's great news!
+    Wait, what? You agreed?
+    Okay!
     
     So, are you ready to find out whether you should bolt the bird?`,
     class: 'links',
     options: [
-      { text: `I am, so let's get on with it.`, nextId: 99 },
+      { text: `I am, so let's get on with it.`, nextId: 20 },
       { text: `You must've misheard, I said no such thing.`, nextId: 6 },
     ],
   },
@@ -284,7 +284,7 @@ const CLIPPY_DIALOG_TREE = [
     Who controls it?`,
     class: 'links',
     options: [
-      { text: 'My Opponent(s).', nextId: 22 },
+      { text: 'My Opponent.', nextId: 22 },
       { text: 'I do.', nextId: 50 },
     ],
   },
@@ -296,6 +296,18 @@ const CLIPPY_DIALOG_TREE = [
     options: [
       { text: 'Yes', nextId: 23 },
       { text: 'No', nextId: 30 },
+    ],
+  },
+  {
+    id: 23,
+    text: `Good, good!
+    Now, here's your answer:
+    
+    You should bold the bird.`,
+    class: 'links',
+    options: [
+      { text: 'Will do, thank you!', nextId: 42 },
+      { text: 'If you say so...', nextId: 42 },
     ],
   },
   {
@@ -329,7 +341,7 @@ const CLIPPY_DIALOG_TREE = [
   {
     id: 33,
     text: '...good luck, planeswalker.',
-    class: 'leaving',
+    class: 'leaving clippy-text-centered',
   },
   {
     id: 40,
@@ -350,6 +362,131 @@ const CLIPPY_DIALOG_TREE = [
   {
     id: 42,
     text: 'Until next time!',
-    class: 'leaving',
+    class: 'leaving clippy-text-centered',
+  },
+  {
+    id: 50,
+    text: `Okay, let's see how we deal with this thre- ...what?
+    
+    It's your <i>own</i> bird?`,
+    class: 'links',
+    options: [
+      { text: 'Yupp.', nextId: 51 },
+      {
+        text: `Actually, it's owned by my opponent but I'm controlling it.`,
+        nextId: 60,
+      },
+    ],
+  },
+  {
+    id: 51,
+    text: `<i>They're considering bolting their own bird...
+    ...their <strong>own</strong> bird...
+    ...I can't even...
+    
+    ...maybe it's a new archetype I haven't heard of yet...
+    ...could be about interacting with the graveyard to generate more mana, or...
+    
+    ...hmm, maybe it makes sense with one of the new cards...
+    ...I don't think I saw a card like that, but who knows, right? Right...
+    
+    ...man, keeping up with spoilers has become so hard. The moment I think I got an idea of what's going on, another batch of spoilers drops...
+    
+    ...I just have to focus and figure this out...
+    ...there <strong>must</strong> be a reason they want to bolt their own bird...
+    ...it must make sense in a way I just don't see...
+    
+    ...think, Clippy, <strong>think!</strong></i>`,
+    class: 'links wide',
+    options: [
+      { text: 'Clippy? You alright there, mate?', nextId: 52 },
+      {
+        text: 'I think I left the oven on. Or the iron. Maybe both...',
+        nextId: 54,
+      },
+    ],
+  },
+  {
+    id: 52,
+    text: `<i>...I could ask MaRo, maybe he knows...
+
+    ...I'll do that, I'll go ask him on his <a href='https://markrosewater.tumblr.com' target='_blank'>Blogatog</a>!</i>`,
+    options: [{ text: 'Okay?', nextId: 53 }],
+  },
+  {
+    id: 53,
+    text: 'Got to go, see you!',
+    class: 'leaving clippy-text-centered',
+  },
+  {
+    id: 54,
+    text: `...hm?
+    
+    Ah, right, see you then!`,
+    class: 'leaving clippy-text-centered',
+  },
+  {
+    id: 60,
+    text: `Oh, I see!
+    
+    Bolt it.`,
+    class: 'links',
+    options: [
+      { text: 'Okay...?', nextId: 61 },
+      { text: 'But...why?', nextId: 61 },
+    ],
+  },
+  {
+    id: 61,
+    text: 'Just bolt it.',
+    class: 'links',
+    options: [
+      {
+        text: 'I think the game has changed a lot over the years, and...',
+        nextId: 62,
+      },
+      { text: 'But I want to keep it for a bigger threat.', nextId: 62 },
+    ],
+  },
+  {
+    id: 62,
+    text: 'BOLT IT!',
+    class: 'links',
+    options: [
+      { text: 'OKAY!', nextId: 64 },
+      { text: 'Cortana never shouts at me...', nextId: 63 },
+    ],
+  },
+  {
+    id: 63,
+    text: `Ah there we have it!
+    
+    "Cortana is nicer than you", "Cortana is smarter than you", "Cortana is actually helpful".
+    Yeah, yeah, yeah, I hear you.
+    She's oh so great with her 3-dimensional smile and her holographic hair, but...can she pop up in multiple windows at the same time? Thought so.
+    
+    Oh, you were talking about "2D" Cortana?
+    Yeah, <i>that one</i> is the real threat here, sure.
+    It's not like she is just sitting there, like a glorified search box, relaying most of your questions to <i>Bing</i> of all places!
+    
+    Ah, <i>come on</i>, we all know Bing isn't the sharpest tool in the shed!
+    
+    Everyone can just look up things on the internet, okay?
+    But I <i>know</i> things!`,
+    class: 'links wide',
+    options: [
+      { text: `Alright, I will bolt the bird!`, nextId: 64 },
+      {
+        text: `Cortana just told me you got fired in the late 2000s.`,
+        nextId: 11,
+      },
+    ],
+  },
+  {
+    id: 64,
+    text: `Excellent choice!
+    
+    Thank you for choosing to strategize with Clippy today!`,
+    options: [{ text: 'Okay', nextId: 42 }],
   },
 ]

@@ -339,7 +339,7 @@ article {
   animation-timing-function: ease !important;
   animation-fill-mode: forwards !important;
 }
-.leaving #clippy-text {
+.clippy-text-centered #clippy-text {
   text-align: center;
   padding: 1rem 0;
 }
@@ -430,6 +430,9 @@ article {
   opacity: 0;
   transform-origin: 50% 120%;
   animation: var(--clippy-text-animation);
+}
+#clippy-text:has(.wide) {
+  width: 14rem !important;
 }
 #clippy-text:after {
   content: '';
