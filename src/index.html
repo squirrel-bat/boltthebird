@@ -4,6 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Should You Bolt the Bird?</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png" />
+    <link rel="manifest" href="./site.webmanifest" />
+    <link rel="mask-icon" href="./safari-pinned-tab.svg" color="#5bbad5" />
+    <meta name="msapplication-TileColor" content="#da532c" />
     <link rel="stylesheet" href="./fonts.css" />
     <link rel="stylesheet" href="./main.css" />
   </head>
@@ -55,7 +61,10 @@
 
     <main data-route="always" class="fade-in display-none">
       <div id="clippy">
-        <div id="clippy-text">
+        <div
+          id="clippy-text"
+          style="--clippy-text-animation: fade-in 500ms ease-out forwards 7s"
+        >
           <div id="clippy-buttons"></div>
         </div>
         <div class="clippy-eyes"></div>
