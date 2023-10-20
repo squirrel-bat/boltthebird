@@ -4,14 +4,41 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Bolt the Bird!</title>
-    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
-    <link rel="manifest" href="site.webmanifest" />
-    <link rel="mask-icon" href="safari-pinned-tab.svg" color="#5bbad5" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="./apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="./favicon-16x16.png"
+    />
+    <link rel="manifest" href="./site.webmanifest" />
+    <link rel="mask-icon" href="./safari-pinned-tab.svg" color="#5bbad5" />
     <meta name="msapplication-TileColor" content="#da532c" />
-    <link rel="stylesheet" href="fonts.css" />
-    <link rel="stylesheet" href="boltem.css" />
+
+    <link rel="preload" href="./AmaticSC-Regular.ttf" as="font" crossorigin />
+    <link rel="preload" href="./Lora-Medium.ttf" as="font" crossorigin />
+
+    <link rel="modulepreload" href="./animationPlayer.js" as="script" />
+    <link rel="modulepreload" href="./bird.js" as="script" />
+    <link rel="modulepreload" href="./hand.js" as="script" />
+    <link rel="modulepreload" href="./score.js" as="script" />
+    <link rel="modulepreload" href="./shared.js" as="script" />
+
+    <link rel="stylesheet" href="./shared.css" />
+    <link rel="stylesheet" href="./fonts.css" />
+    <link rel="stylesheet" href="./boltem.css" />
+
+    <script src="./boltem.js" type="module"></script>
   </head>
   <body>
     <aside id="start-screen">
@@ -235,7 +262,5 @@
         </div>
       </div>
     </aside>
-
-    <script src="boltem.js" type="module"></script>
   </body>
 </html>

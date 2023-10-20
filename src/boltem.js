@@ -30,6 +30,8 @@ const statLabels = {
 }
 const hl = '------------------\n'
 
+// FIXME: Cache assets
+
 window.copyResultsToClipboard = () => {
   const sound = new Audio('./copy_cam.mp3')
   const res = Object.keys(window.gameTracker)
